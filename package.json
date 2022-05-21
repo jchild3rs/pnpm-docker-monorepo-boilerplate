@@ -8,12 +8,13 @@
   ],
   "scripts": {
     "build": "turbo run build",
+    "docker:web": "docker build -t web -f ./apps/web/Dockerfile .",
+    "docker:docs": "docker build -t docs -f ./apps/docs/Dockerfile .",
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
-  "devDependencies": {
-    "prettier": "latest",
+  "dependencies": {
     "turbo": "latest"
   },
   "engines": {
