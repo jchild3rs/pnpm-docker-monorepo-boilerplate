@@ -54,4 +54,4 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node_modules-${{ hashFiles('**/pnpm-lock.yaml') }}-
       - run: pnpm install --frozen-lockfile
-      - run: pnpm docker:rent
+      - run: DOCKER_BUILDKIT=1 pnpm docker
