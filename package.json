@@ -8,6 +8,7 @@
   ],
   "scripts": {
     "build": "turbo run build",
+    "test": "turbo run test",
     "docker": "turbo run docker",
     "docker:api": "docker build -f ./apps/api/Dockerfile . --tag api:latest",
     "docker:rent": "docker build -f ./apps/rent/Dockerfile . --tag rent:latest",
