@@ -1,4 +1,4 @@
-SharedSteps: &sharedSteps
+Defaults: &defaults
   - uses: actions/checkout@v2
   - uses: pnpm/action-setup@v2.0.1
     with:
@@ -24,17 +24,14 @@ on:
 jobs:
   setup:
     runs-on: ubuntu-latest
-    steps:
-      <<: *sharedSteps
+    steps: *defaults
   test:
     needs: [setup]
     runs-on: ubuntu-latest
-    steps:
-      <<: *sharedSteps
+    steps: &defaults
       - run: pnpm test
   deploy:
     needs: [test]
     runs-on: ubuntu-latest
-    steps:
-      <<: *sharedSteps
+    steps: &defaults
       - run: DOCKER_BUILDKIT=1 pnpm docker
