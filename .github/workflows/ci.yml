@@ -16,6 +16,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/workflows/install
+        with:
+          workspace: ${{ github.workspace }}
       - run: pnpm test
   deploy:
     needs: [test]
