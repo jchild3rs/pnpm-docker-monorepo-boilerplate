@@ -9,7 +9,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: ./.github/workflows/install
+      - uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 6.32.9
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: ".nvmrc"
+          cache: "pnpm"
+      - run: pnpm install --frozen-lockfile
       - uses: actions/cache@v2
         with:
           path: ${{ github.workspace }}/node_modules
@@ -21,23 +29,30 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 6.32.9
       - uses: actions/cache@v2
         with:
           path: ${{ github.workspace }}/node_modules
           key: ${{ runner.os }}-node_modules-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
           restore-keys: |
             ${{ runner.os }}-node_modules-${{ hashFiles('**/pnpm-lock.yaml') }}-
+      - run: pnpm install --frozen-lockfile
       - run: pnpm test
   deploy:
     needs: [test]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: ./.github/workflows/install
+      - uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 6.32.9
       - uses: actions/cache@v2
         with:
           path: ${{ github.workspace }}/node_modules
           key: ${{ runner.os }}-node_modules-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
           restore-keys: |
             ${{ runner.os }}-node_modules-${{ hashFiles('**/pnpm-lock.yaml') }}-
+      - run: pnpm install --frozen-lockfile
       - run: DOCKER_BUILDKIT=1 pnpm docker
