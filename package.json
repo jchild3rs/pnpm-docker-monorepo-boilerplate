@@ -8,18 +8,22 @@
   ],
   "scripts": {
     "build": "turbo run build",
-    "docker:web": "docker build -t web -f ./apps/web/Dockerfile .",
-    "docker:docs": "docker build -t docs -f ./apps/docs/Dockerfile .",
+    "docker": "turbo run docker",
+    "docker:api": "docker build -f ./apps/api/Dockerfile . --tag api:latest",
+    "docker:rent": "docker build -f ./apps/rent/Dockerfile . --tag rent:latest",
+    "docker:ag": "docker build -f ./apps/ag/Dockerfile . --tag ag:latest",
+    "clean": "turbo run clean && rimraf node_modules",
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
-  },
-  "dependencies": {
-    "turbo": "latest"
   },
   "engines": {
     "npm": ">=7.0.0",
     "node": ">=14.0.0"
   },
-  "packageManager": "pnpm@6.32.9"
+  "packageManager": "pnpm@6.32.9",
+  "devDependencies": {
+    "rimraf": "^3.0.2",
+    "turbo": "latest"
+  }
 }

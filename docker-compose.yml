@@ -1,0 +1,22 @@
+services:
+  api:
+    build:
+      context: ./
+      dockerfile: ./apps/api/Dockerfile
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+  web:
+    build:
+      context: ./
+      dockerfile: ./apps/web/Dockerfile
+    restart: unless-stopped
+    ports:
+      - "9461:3000"
+  docs:
+    build:
+      context: ./
+      dockerfile: ./apps/docs/Dockerfile
+    restart: unless-stopped
+    ports:
+      - "9451:3000"

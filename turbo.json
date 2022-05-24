@@ -4,6 +4,12 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**", ".next/**"]
     },
+    "clean": {
+      "cache": false
+    },
+    "docker": {
+      "cache": false
+    },
     "lint": {
       "outputs": []
     },
