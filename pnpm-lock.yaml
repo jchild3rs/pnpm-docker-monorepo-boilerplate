@@ -37,6 +37,7 @@ importers:
       ts-jest: 28.0.1
       ts-loader: ^9.2.3
       ts-node: ^10.0.0
+      tsconfig: workspace:*
       tsconfig-paths: 4.0.0
       typescript: ^4.3.5
     dependencies:
@@ -66,6 +67,7 @@ importers:
       ts-jest: 28.0.1_jw4qpfj6m43htbnoqw2i363564
       ts-loader: 9.3.0_typescript@4.6.4
       ts-node: 10.8.0_rbv5fvwh3qaahz6dxcho7rzsry
+      tsconfig: link:../../packages/tsconfig
       tsconfig-paths: 4.0.0
       typescript: 4.6.4
 
