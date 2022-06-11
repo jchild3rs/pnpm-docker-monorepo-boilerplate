@@ -1,9 +1,0 @@
-Dockerfile
-.eslintrc.js
-.git
-.dockerignore
-node_modules
-npm-debug.log
-README.md
-.git
-turbo.json
