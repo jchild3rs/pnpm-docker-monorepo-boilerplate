@@ -9,21 +9,21 @@ RUN --mount=type=cache,id=pnpm-store,target=/opt/app/.pnpm-store\
 FROM base AS build
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml /opt/app/
 COPY packages/ /opt/app/packages
-COPY apps/rent/package.json /opt/app/apps/rent/package.json
+COPY apps/web/package.json /opt/app/apps/web/package.json
 RUN --mount=type=cache,id=pnpm-store,target=/opt/app/.pnpm-store\
-  pnpm install --offline --filter rent --frozen-lockfile
-COPY apps/rent/ /opt/app/apps/rent
-RUN pnpm --filter rent build
+  pnpm install --offline --filter web --frozen-lockfile
+COPY apps/web/ /opt/app/apps/web
+RUN pnpm --filter web build
 
 FROM base AS prod
 ENV NODE_ENV production
 ENV NEXT_TELEMETRY_DISABLED 1
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
-COPY --from=build --chown=nextjs:nodejs /opt/app/apps/rent/.next/standalone/ /opt/app/apps/rent/standalone
-COPY --from=build --chown=nextjs:nodejs /opt/app/apps/rent/.next/static/ /opt/app/apps/rent/static
-COPY --from=build /opt/app/apps/rent/public /opt/app/apps/rent/public
+COPY --from=build --chown=nextjs:nodejs /opt/app/apps/web/.next/standalone/ /opt/app/apps/web/standalone
+COPY --from=build --chown=nextjs:nodejs /opt/app/apps/web/.next/static/ /opt/app/apps/web/static
+COPY --from=build /opt/app/apps/web/public /opt/app/apps/web/public
 
-WORKDIR /opt/app/apps/rent/standalone/apps/rent
+WORKDIR /opt/app/apps/web/standalone/apps/web
 EXPOSE 3000
 ENTRYPOINT [ "node", "server.js" ]
