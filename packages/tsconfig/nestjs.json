@@ -1,7 +1,5 @@
 {
   "compilerOptions": {
-    "$schema": "https://json.schemastore.org/tsconfig",
-    "display": "NestJS",
     "module": "commonjs",
     "declaration": true,
     "removeComments": true,

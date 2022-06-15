@@ -1,10 +1,18 @@
-const path = require("path");
-const withTM = require("next-transpile-modules")(["ui"]);
+const path = require('path')
 
-module.exports = withTM({
-  reactStrictMode: true,
+/**
+ * @type {import('next').NextConfig}
+ */
+const nextConfig = {
   experimental: {
-    outputStandalone: true,
-    outputFileTracingRoot: path.join(__dirname, "../../"),
+    // runtime: 'nodejs',
+    serverComponents: true,
+    outputStandalone: true, // enable output tracing for tiny docker node images
+    outputFileTracingRoot: path.join(__dirname, '../../'), // this includes files from the monorepo base two directories up
   },
-});
+  images: {
+    domains: ['via.placeholder.com'],
+  },
+}
+
+module.exports = nextConfig

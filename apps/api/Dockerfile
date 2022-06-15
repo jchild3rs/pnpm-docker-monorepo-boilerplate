@@ -1,26 +1,49 @@
-FROM node:16-alpine AS base
-RUN npm i -g pnpm@6.32.9
-WORKDIR /opt/app
-# COPY pnpm-lock.yaml pnpm-workspace.yaml /opt/app/
-# RUN --mount=type=cache,id=pnpm-store,target=/opt/app/.pnpm-store\
-#   pnpm fetch
+# ----------------------------------------------------------
+# Install deps on lockfile changes.
+# ----------------------------------------------------------
+FROM node:16.14.2 AS installer
+WORKDIR /app
+ARG APP
+ENV APP=$APP
+ARG GPR_USER_PAT
+RUN printf "@rentpath:registry=https://npm.pkg.github.com/\n//npm.pkg.github.com/:_authToken=$GPR_USER_PAT" > $HOME/.npmrc
+RUN npm i -g pnpm@7.x
+COPY pnpm-lock.yaml pnpm-workspace.yaml ./
+RUN --mount=type=cache,id=pnpm-store,target=/app/.pnpm-store\
+      pnpm fetch
 
-FROM base AS build
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml /opt/app/
-COPY apps/api/package.json /opt/app/apps/api/package.json
-RUN echo "//npm.pkg.github.com/:_authToken=$GPR_USER_PAT\n@rentpath:registry=https://npm.pkg.github.com" > $HOME/.npmrc
-RUN --mount=type=cache,id=pnpm-store,target=/opt/app/.pnpm-store\
-  pnpm install --filter api --frozen-lockfile
-COPY apps/api/ /opt/app/apps/api
-RUN pnpm --filter api build
+# ----------------------------------------------------------
+# Build packages & app source.
+# ----------------------------------------------------------
+FROM installer AS builder
+WORKDIR /app
+ARG APP
+ADD . ./
+RUN --mount=type=cache,id=pnpm-store,target=/app/.pnpm-store\
+      pnpm install -r --offline
+RUN pnpm --if-present --filter "./packages/**" build
+RUN pnpm --filter $APP build
+RUN find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +
+RUN --mount=type=cache,id=pnpm-store,target=/app/.pnpm-store\
+      pnpm install -r --prod --offline --ignore-scripts --frozen-lockfile
 
-FROM base AS prod
-COPY pnpm-lock.yaml pnpm-workspace.yaml /opt/app/
-COPY apps/api/package.json /opt/app/apps/api/package.json
-RUN echo "//npm.pkg.github.com/:_authToken=$GPR_USER_PAT\n@rentpath:registry=https://npm.pkg.github.com" > $HOME/.npmrc
-RUN --mount=type=cache,id=pnpm-store,target=/opt/app/.pnpm-store\
-  pnpm install --filter api --frozen-lockfile --prod && ls -a /opt/app/.pnpm-store
-COPY --from=build /opt/app/apps/api/dist/ /opt/app/apps/api/dist/
-WORKDIR /opt/app/apps/api
-EXPOSE 3000
-ENTRYPOINT [ "pnpm", "start" ]
+# ----------------------------------------------------------
+# Copy build artifacts and start app.
+# ----------------------------------------------------------
+FROM node:16.14.2-alpine AS runner
+WORKDIR /app
+
+ARG APP
+ENV APP=$APP
+ARG PORT=3000
+ENV PORT=$PORT
+ENV NODE_ENV production
+
+COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/node_modules/ ./node_modules
+COPY --from=builder /app/apps/${APP}/package.json ./apps/${APP}/package.json
+COPY --from=builder /app/apps/${APP}/node_modules/ ./apps/${APP}/node_modules
+COPY --from=builder /app/apps/${APP}/dist ./apps/${APP}/dist
+
+EXPOSE ${PORT}
+ENTRYPOINT node "./apps/${APP}/dist/main.js"
