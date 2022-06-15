@@ -9,8 +9,7 @@
   "scripts": {
     "build": "turbo run build",
     "test": "turbo run test",
-    "docker": "turbo run docker",
-    "clean": "turbo run clean && rimraf node_modules",
+    "docker": "DOCKER_BUILDKIT=1 turbo run docker",
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""

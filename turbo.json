@@ -4,11 +4,9 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**", ".next/**"]
     },
-    "clean": {
-      "cache": false
-    },
     "docker": {
-      "cache": false
+      "dependsOn": ["^build"],
+      "outputs": []
     },
     "lint": {
       "outputs": []
@@ -17,6 +15,7 @@
       "cache": false
     },
     "test": {
+      "dependsOn": ["^build"],
       "outputs": []
     }
   }

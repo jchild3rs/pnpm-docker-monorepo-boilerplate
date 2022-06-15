@@ -5,15 +5,14 @@ on:
   push:
     branches: [main]
 jobs:
-  install-test-publish:
+  install-test-build-deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: pnpm/action-setup@v2
         with:
           version: 7
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v3
         with:
           node-version-file: ".nvmrc"
           cache: "pnpm"
@@ -21,5 +20,7 @@ jobs:
           scope: "@rentpath"
           token: ${{ secrets.GPR_TOKEN }}
       - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm build
       - run: pnpm test
-      - run: DOCKER_BUILDKIT=1 pnpm docker
+      - run: pnpm docker
