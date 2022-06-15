@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "docker": "docker build ../.. -f ./Dockerfile --build-arg GPR_USER_PAT=$GPR_USER_PAT -t web --build-arg APP=web",
+    "docker": "docker build ../.. -f ./Dockerfile --build-arg GPR_USER_PAT=$GPR_USER_PAT -t @jchild3rs/web:latest --build-arg APP=web",
     "start": "next start",
     "lint": "next lint",
     "test": "jest --passWithNoTests"
