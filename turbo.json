@@ -6,7 +6,7 @@
     },
     "docker": {
       "dependsOn": ["^build"],
-      "outputs": []
+      "cache": false
     },
     "lint": {
       "outputs": []
