@@ -48,11 +48,11 @@ jobs:
         name: Setup turbo cache
         with:
           path: ${{ steps.turbo-cache.outputs.turbo_cache_dir }}
-          key: ${{ runner.os }}-turbo-cache-${{ hashFiles(steps.turbo-cache.outputs.turbo_cache_dir) }}-${{ hashFiles('**/turbo.json') }}
+          key: ${{ runner.os }}-turbo-store-${{ hashFiles(steps.turbo-cache.outputs.turbo_cache_dir) }}-${{ hashFiles('**/turbo.json') }}
           restore-keys: |
-            ${{ runner.os }}-turbo-cache-${{ hashFiles(steps.turbo-cache.outputs.turbo_cache_dir) }}-${{ hashFiles('**/turbo.json') }}
-            ${{ runner.os }}-turbo-cache-${{ hashFiles(steps.turbo-cache.outputs.turbo_cache_dir) }}-
-            ${{ runner.os }}-turbo-cache-
+            ${{ runner.os }}-turbo-store-${{ hashFiles(steps.turbo-cache.outputs.turbo_cache_dir) }}-${{ hashFiles('**/turbo.json') }}
+            ${{ runner.os }}-turbo-store-${{ hashFiles(steps.turbo-cache.outputs.turbo_cache_dir) }}-
+            ${{ runner.os }}-turbo-store-
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --prefer-offline
