@@ -7,11 +7,11 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "turbo run build",
-    "test": "turbo run test",
-    "docker": "DOCKER_BUILDKIT=1 turbo run docker",
-    "dev": "turbo run dev --parallel",
-    "lint": "turbo run lint",
+    "build": "turbo run build --no-color --output-logs=new-only",
+    "test": "turbo run test --no-color --output-logs=new-only",
+    "docker": "DOCKER_BUILDKIT=1 turbo run docker --no-color --output-logs=new-only",
+    "dev": "turbo run dev --parallel --no-cache",
+    "lint": "turbo run lint --no-color --output-logs=new-only",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "engines": {

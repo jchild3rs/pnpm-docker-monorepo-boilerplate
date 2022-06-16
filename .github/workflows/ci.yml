@@ -51,7 +51,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --prefer-offline
 
-      - run: pnpm lint --no-color --output-logs=new-only
-      - run: pnpm test --no-color --output-logs=new-only
-      - run: pnpm build --no-color --output-logs=new-only
+      - run: pnpm lint
+      - run: pnpm test
+      - run: pnpm build
       # - run: pnpm docker
