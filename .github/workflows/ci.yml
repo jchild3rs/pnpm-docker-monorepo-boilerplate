@@ -16,11 +16,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version-file: ".nvmrc"
-          cache: "pnpm"
           registry-url: https://npm.pkg.github.com
           scope: "@rentpath"
           token: ${{ secrets.GPR_TOKEN }}
-
 
       - uses: pnpm/action-setup@v2.0.1
         name: Install pnpm
