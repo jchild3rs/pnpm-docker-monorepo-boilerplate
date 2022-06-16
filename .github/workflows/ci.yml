@@ -46,11 +46,9 @@ jobs:
         name: Setup turbo cache
         with:
           path: ./node_modules/.cache/turbo
-          key: ${{ runner.os }}-turbo--${{ github.event.inputs.branch }}-${{ hashFiles('**/turbo.json') }}
+          key: ${{ runner.os }}-turborepo-${{ github.ref_name }}-${{ hashFiles('**/turbo.json') }}
           restore-keys: |
-            ${{ runner.os }}-turbo--${{ github.event.inputs.branch }}-${{ hashFiles('**/turbo.json') }}
-            ${{ runner.os }}-turbo--${{ github.event.inputs.branch }}-
-            ${{ runner.os }}-turbo--
+            ${{ runner.os }}-turborepo-main-${{ hashFiles('**/turbo.json') }}
 
       - run: pnpm lint
       - run: pnpm test
