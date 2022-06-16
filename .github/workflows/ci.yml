@@ -39,6 +39,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
+      - uses: actions/cache@v3
+        name: Setup turbo cache
+        with:
+          path: ./node_modules/.cache/turbo
+          key: ${{ runner.os }}-turbo-cache
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --prefer-offline
 
