@@ -30,6 +30,11 @@ jobs:
         id: pnpm-cache
         run: |
           echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
+      
+      - name: Get turbo store directory
+        id: turbo-cache
+        run: |
+          echo "::set-output name=turbo_cache_dir::./node_modules/.cache/turbo"
 
       - uses: actions/cache@v3
         name: Setup pnpm cache
@@ -42,9 +47,11 @@ jobs:
       - uses: actions/cache@v3
         name: Setup turbo cache
         with:
-          path: ./node_modules/.cache/turbo
-          key: ${{ runner.os }}-turbo-cache-${{ hashFiles('turbo.json') }}
+          path: ${{ steps.turbo-cache.outputs.turbo_cache_dir }}
+          key: ${{ runner.os }}-turbo-cache-${{ hashFiles(steps.turbo-cache.outputs.turbo_cache_dir) }}-${{ hashFiles('**/turbo.json') }}
           restore-keys: |
+            ${{ runner.os }}-turbo-cache-${{ hashFiles(steps.turbo-cache.outputs.turbo_cache_dir) }}-${{ hashFiles('**/turbo.json') }}
+            ${{ runner.os }}-turbo-cache-${{ hashFiles(steps.turbo-cache.outputs.turbo_cache_dir) }}-
             ${{ runner.os }}-turbo-cache-
 
       - name: Install dependencies
