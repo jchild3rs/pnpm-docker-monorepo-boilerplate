@@ -43,7 +43,9 @@ jobs:
         name: Setup turbo cache
         with:
           path: ./node_modules/.cache/turbo
-          key: ${{ runner.os }}-turbo-cache
+          key: ${{ runner.os }}-turbo-cache-${{ hashFiles('turbo.json') }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-cache-
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --prefer-offline
