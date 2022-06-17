@@ -12,7 +12,7 @@
     "docker": "DOCKER_BUILDKIT=1 turbo run docker",
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
-    "ci": "turbo run lint test build",
+    "ci": "turbo run lint test build --output-logs=new-only",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "engines": {
