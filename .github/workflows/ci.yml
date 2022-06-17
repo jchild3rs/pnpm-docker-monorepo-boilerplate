@@ -44,6 +44,7 @@ jobs:
 
       - name: Download turbo cache
         uses: dawidd6/action-download-artifact@v2
+        continue-on-error: true
         with:
           # Optional, GitHub token, a Personal Access Token with `public_repo` scope if needed
           # Required, if artifact is from a different repo
