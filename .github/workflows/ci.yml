@@ -14,6 +14,11 @@ jobs:
   lint-test-build-deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 25
+
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
@@ -21,11 +26,6 @@ jobs:
           registry-url: https://npm.pkg.github.com
           scope: "@rentpath"
           token: ${{ secrets.GPR_TOKEN }}
-
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 25
 
       - name: Install pnpm
         run: npm i -g pnpm@${PNPM_VERSION}
