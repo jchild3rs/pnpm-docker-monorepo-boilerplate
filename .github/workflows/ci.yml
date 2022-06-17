@@ -43,12 +43,21 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --prefer-offline
 
-      - name: Turbo Cache
-        id: turbo-cache
+      - name: Use `main` Turbo Cache
+        if: github.ref != 'refs/heads/main'
+        id: turbo-cache-get
         uses: actions/cache@v2
         with:
           path: .turbo
           key: turbo-${{ github.event.pull_request.base.sha }}
+      
+      - name: Update Turbo Cache
+        if: github.ref == 'refs/heads/main'
+        id: turbo-cache-set
+        uses: actions/cache@v2
+        with:
+          path: .turbo
+          key: turbo-${{ github.sha }}
             
       - name: Lint, Test, Build
         run: pnpm ci
