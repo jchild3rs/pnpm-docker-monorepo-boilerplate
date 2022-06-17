@@ -72,6 +72,12 @@ jobs:
     needs: lint-test-build
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/cache@v3
+        id: restore-build
+        with:
+          path: ./*
+          key: ${{ github.sha }}-${{ github.run_number }}
+
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
@@ -86,12 +92,6 @@ jobs:
         with:
           version: 7
           run_install: false
-
-      - uses: actions/cache@v3
-        id: restore-build
-        with:
-          path: ./*
-          key: ${{ github.sha }}-${{ github.run_number }}
 
       - name: Build deployment images
         run: pnpm docker
