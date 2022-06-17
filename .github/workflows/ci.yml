@@ -45,7 +45,7 @@ jobs:
 
       - name: Use `main` Turbo Cache
         if: github.ref != 'refs/heads/main'
-        id: turbo-cache
+        id: turbo-cache-get
         uses: actions/cache@v2
         with:
           path: .turbo
@@ -53,7 +53,7 @@ jobs:
       
       - name: Update Turbo Cache
         if: github.ref == 'refs/heads/main'
-        id: turbo-cache
+        id: turbo-cache-set
         uses: actions/cache@v2
         with:
           path: .turbo
