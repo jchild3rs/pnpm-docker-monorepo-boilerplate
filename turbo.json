@@ -12,6 +12,7 @@
       "outputs": []
     },
     "publish": {
+      "dependsOn": ["^docker"],
       "outputs": []
     },
     "dev": {
