@@ -72,6 +72,20 @@ jobs:
     needs: lint-test-build
     runs-on: ubuntu-latest
     steps:
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: ".nvmrc"
+          registry-url: https://npm.pkg.github.com
+          scope: "@rentpath"
+          token: ${{ secrets.GPR_TOKEN }}
+
+      - uses: pnpm/action-setup@v2.0.1
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 7
+          run_install: false
 
       - uses: actions/cache@v3
         id: restore-build
