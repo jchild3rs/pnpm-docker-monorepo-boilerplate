@@ -41,6 +41,18 @@ jobs:
             ${{ runner.os }}-pnpm-store-
 
       - uses: actions/cache@v3
+        if: github.ref != 'refs/heads/main'
+        name: Setup turbo cache
+        with:
+          path: ./node_modules/.cache/turbo
+          key: ${{ runner.os }}-turbo-${{ hashFiles('**/turbo.json') }}-${{ github.ref }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-${{ hashFiles('**/turbo.json') }}-refs/head/main
+            ${{ runner.os }}-turbo-${{ hashFiles('**/turbo.json') }}-${{ github.ref }}
+      
+
+      - uses: actions/cache@v3
+        if: github.ref == 'refs/heads/main'
         name: Setup turbo cache
         with:
           path: ./node_modules/.cache/turbo
