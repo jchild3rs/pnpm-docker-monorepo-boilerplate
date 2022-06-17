@@ -8,7 +8,7 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
-    "docker": "docker build ../.. -f ./Dockerfile --build-arg GPR_USER_PAT=$GPR_USER_PAT -t api --build-arg APP=api",
+    "docker": "docker build ../.. -f ./Dockerfile --build-arg GPR_USER_PAT=$GPR_USER_PAT -t ghcr.io/jchild3rs/api --build-arg APP=api",
     "publish": "docker push ghcr.io/jchild3rs/api:latest",
     "dev": "PORT=4000 nest start --watch --debug",
     "start": "node dist/main",

@@ -3,6 +3,7 @@ name: CI
 env:
   TURBO_VERSION: 1.2.14
   PNPM_VERSION: 7.1.6
+  GPR_USER_PAT: ${{ secrets.GITHUB_TOKEN }}
 
 on:
   pull_request:
