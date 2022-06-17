@@ -45,11 +45,6 @@ jobs:
         with:
           path: ./node_modules/.cache/turbo
           key: ${{ runner.os }}-turbo-${{ hashFiles('**/turbo.json') }}-${{ github.ref }}
-          restore-keys: |
-            ${{ runner.os }}-turbo-
-            ${{ runner.os }}-turbo-${{ hashFiles('**/turbo.json') }}
-            ${{ runner.os }}-turbo-${{ hashFiles('**/turbo.json') }}-refs/head/main
-            ${{ runner.os }}-turbo-${{ hashFiles('**/turbo.json') }}-${{ github.ref }}
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --prefer-offline
