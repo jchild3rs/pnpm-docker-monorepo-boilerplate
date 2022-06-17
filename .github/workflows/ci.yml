@@ -47,7 +47,7 @@ jobs:
       - name: Get main SHA
         id: main-sha
         run: |
-          echo "::set-output name=main_sha::$(git rev-parse origin/main)"
+          echo "::set-output name=main_sha::$(git rev-parse 'origin/main')"
  
 
       - name: Turbo Cache
