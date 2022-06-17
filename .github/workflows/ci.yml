@@ -40,23 +40,17 @@ jobs:
             ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
             ${{ runner.os }}-pnpm-store-
 
-      - uses: actions/cache@v3
-        if: github.ref != 'refs/heads/main'
-        name: Setup turbo cache
-        with:
-          path: ./node_modules/.cache/turbo
-          key: ${{ runner.os }}-turbo-${{ hashFiles('**/turbo.json') }}-${{ github.event.pull_request.base.sha }}-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-turbo-${{ hashFiles('**/turbo.json') }}-${{ github.event.pull_request.base.sha }}
-            ${{ runner.os }}-turbo-${{ hashFiles('**/turbo.json') }}-${{ github.event.pull_request.base.sha }}-${{ github.sha }}
-
-      - uses: actions/cache@v3
-        if: github.ref == 'refs/heads/main'
-        name: Setup turbo cache
-        with:
-          path: ./node_modules/.cache/turbo
-          key: ${{ runner.os }}-turbo-${{ hashFiles('**/turbo.json') }}-${{ github.sha }}
-
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --prefer-offline
-      - run: pnpm ci
+
+      - name: Turbo Cache
+        id: turbo-cache
+        uses: actions/cache@v2
+        with:
+          path: .turbo
+          key: turbo-${{ github.job }}-${{ github.ref_name }}-${{ github.sha }}
+          restore-keys: |
+            turbo-${{ github.job }}-${{ github.ref_name }}-
+            
+      - name: Lint, Test, Build
+        run: pnpm ci
