@@ -43,19 +43,12 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --prefer-offline
 
-
-      - name: Get main SHA
-        id: main-sha
-        run: |
-          echo "::set-output name=main_sha::$(git rev-parse 'origin/main')"
- 
-
       - name: Turbo Cache
         id: turbo-cache
         uses: actions/cache@v2
         with:
           path: .turbo
-          key: turbo-${{ steps.main-sha.outputs.main_sha }}
+          key: turbo-${{ github.event.pull_request.head.sha }}
             
       - name: Lint, Test, Build
         run: pnpm ci
