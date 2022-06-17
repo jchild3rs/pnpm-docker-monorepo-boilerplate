@@ -6,7 +6,6 @@ export default function MyApp({
   Component,
   pageProps,
 }: AppProps) {
-  console.log('test');
   return (
     <>
       <Header />
