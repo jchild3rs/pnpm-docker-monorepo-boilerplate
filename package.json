@@ -9,7 +9,7 @@
   "scripts": {
     "build": "turbo run build",
     "test": "turbo run test",
-    "docker": "DOCKER_BUILDKIT=1 turbo run docker",
+    "docker": "DOCKER_BUILDKIT=1 turbo run docker --output-logs=new-only --cache-dir=.turbo",
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
     "ci": "turbo run lint test build --output-logs=new-only --cache-dir=.turbo",

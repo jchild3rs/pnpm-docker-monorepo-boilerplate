@@ -1,17 +1,25 @@
 name: CI
+
+env:
+  TURBO_VERSION: 1.2.14
+  PNPM_VERSION: 7.1.6
+
 on:
   pull_request:
     types: [opened, synchronize, reopened]
   push:
     branches: [main]
+
 jobs:
-  deploy:
+  lint-test-build-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 25
 
-      - name: Install Node.js
+      - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version-file: ".nvmrc"
@@ -19,26 +27,20 @@ jobs:
           scope: "@rentpath"
           token: ${{ secrets.GPR_TOKEN }}
 
-      - uses: pnpm/action-setup@v2.0.1
-        name: Install pnpm
-        id: pnpm-install
-        with:
-          version: 7
-          run_install: false
+      - name: Install pnpm
+        run: npm i -g pnpm@${PNPM_VERSION}
 
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        run: |
-          echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
+      - id: get-store-path
+        run: echo ::set-output name=STORE_PATH::$(pnpm store path)
 
       - uses: actions/cache@v3
-        name: Setup pnpm cache
+        id: cache-pnpm-store
         with:
-          path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          path: ${{ steps.get-store-path.outputs.STORE_PATH }}
+          key: pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-            ${{ runner.os }}-pnpm-store-
+            pnpm-store-
+            pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --prefer-offline
@@ -61,3 +63,8 @@ jobs:
             
       - name: Lint, Test, Build
         run: pnpm ci
+
+      - name: Build deployment images
+        if: github.ref != 'refs/heads/main'
+        run: pnpm docker
+      
