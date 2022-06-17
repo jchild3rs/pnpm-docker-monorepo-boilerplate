@@ -19,6 +19,13 @@ jobs:
         with:
           fetch-depth: 25
 
+      - name: Log in to the Container registry
+        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
@@ -52,7 +59,7 @@ jobs:
         with:
           path: .turbo
           key: turbo-${{ github.event.pull_request.base.sha }}
-      
+
       - name: Update Turbo Cache
         if: github.ref == 'refs/heads/main'
         id: turbo-cache-set
@@ -60,11 +67,5 @@ jobs:
         with:
           path: .turbo
           key: turbo-${{ github.sha }}
-            
-      - name: Lint, Test, Build
-        run: pnpm ci
 
-      - name: Build deployment images
-        if: github.ref != 'refs/heads/main'
-        run: pnpm docker
-      
+      - run: pnpm ci
