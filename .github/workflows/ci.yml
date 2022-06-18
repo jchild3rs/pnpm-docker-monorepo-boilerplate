@@ -12,7 +12,7 @@ env:
   TURBO_TEAM: jchilders
 
 jobs:
-  Lint-Test-Build:
+  Test-Build-Deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -26,5 +26,41 @@ jobs:
           registry-url: https://npm.pkg.github.com
           scope: "@rentpath"
           token: ${{ secrets.GPR_TOKEN }}
+      - name: set vars
+        id: vars
+        run: |
+          BRANCH_NAME=$( echo ${{ github.event.inputs.branch || github.head_ref || github.ref }} | sed -E -e 's/refs\/heads\/(.*)/\1/g' )
+          echo "BRANCH_NAME=${BRANCH_NAME}" >> $GITHUB_ENV
+          echo "::set-output name=branch_name::${BRANCH_NAME}"
+
+          BRANCH_TAG=$(
+            echo "${BRANCH_NAME}" \
+            | sed -e 's/[^a-zA-Z0-9]/-/g' \
+            | tr '[:upper:]' '[:lower:]' \
+            | cut -c 1-32 \
+            | sed -e 's/[^a-z0-9]*$//'
+          )
+          
+          if [[ ${{ contains(github.ref, 'main') }} = true ]];
+            echo "::set-output name=branch_tag::latest"
+          else
+            echo "::set-output name=branch_tag::${BRANCH_TAG}"
+          fi
+          
+          VERSION=$( date -u '+%Y%m%d' )-${{ github.run_number || 0 }}-${SHORT_SHA}
+          echo "::set-output name=version::${VERSION}"
       - run: pnpm install --frozen-lockfile --prefer-offline
       - run: pnpm turbo run lint test build --output-logs=new-only
+      - uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - run: pnpm turbo run docker:build --output-logs=new-only -- --build-arg GPR_USER_PAT=${{ secrets.GITHUB_TOKEN }}
+        env:
+          BRANCH_TAG:  ${{ steps.vars.outputs.branch_tag }}
+          VERSION: ${{ steps.vars.outputs.version }}
+      - run: pnpm turbo run docker:push --output-logs=new-only
+        env:
+          BRANCH_TAG:  ${{ steps.vars.outputs.branch_tag }}
+          VERSION: ${{ steps.vars.outputs.version }}

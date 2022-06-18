@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "docker:build": "docker build ../.. -f ./Dockerfile -t ghcr.io/jchild3rs/web",
-    "docker:push": "docker push ghcr.io/jchild3rs/web:latest",
+    "docker:build": "docker build ../.. -f ./Dockerfile -t ghcr.io/jchild3rs/web:$BRANCH_TAG",
+    "docker:push": "docker push ghcr.io/jchild3rs/web:$BRANCH_TAG",
     "start": "next start",
     "lint": "next lint",
     "test": "jest --passWithNoTests"
