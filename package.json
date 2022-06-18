@@ -9,12 +9,11 @@
   "scripts": {
     "build": "turbo run build",
     "test": "turbo run test",
-    "docker": "DOCKER_BUILDKIT=1 turbo run docker --output-logs=new-only",
-    "publish": "DOCKER_BUILDKIT=1 turbo run publish --output-logs=new-only",
+    "docker:build": "turbo run docker:build",
+    "docker:push": "turbo run docker:push",
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "release": "changeset publish"
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "engines": {
     "npm": ">=7.0.0",
@@ -22,7 +21,6 @@
   },
   "packageManager": "pnpm@6.32.9",
   "devDependencies": {
-		"@changesets/cli": "^2.22.0",
     "rimraf": "^3.0.2",
     "turbo": "latest"
   }

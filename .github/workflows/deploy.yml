@@ -1,0 +1,32 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  PNPM_VERSION: 7.1.6
+  TURBO_CACHE_KEY: ubuntu-latest-16 # reuse cache key from ci workflow
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  TURBO_TEAM: jchilders
+  DOCKER_BUILDKIT: 1 
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2.2.2
+        with:
+          version: $PNPM_VERSION
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          cache: pnpm
+          registry-url: https://npm.pkg.github.com
+          scope: "@rentpath"
+          token: ${{ secrets.GPR_TOKEN }}
+      - run: pnpm install --frozen-lockfile --prefer-offline
+      - run: pnpm turbo run docker:push -- --build-arg GPR_USER_PAT=${{ secrets.GITHUB_TOKEN }}

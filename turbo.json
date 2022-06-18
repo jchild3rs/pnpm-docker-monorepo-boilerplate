@@ -4,24 +4,25 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**", ".next/**", "build/**"]
     },
-    "docker": {
-      "dependsOn": ["build"],
+    "docker:build": {
+      "dependsOn": ["^build"],
+      "outputs": []
+    },
+    "docker:push": {
+      "dependsOn": ["^docker:build"],
       "outputs": []
     },
     "lint": {
       "outputs": []
     },
-    "publish": {
-      "dependsOn": ["docker"],
-      "outputs": []
-    },
     "dev": {
       "cache": false
     },
-    "test": {
-      "dependsOn": ["^build"],
-      "outputs": []
-    }
+		"test": {
+			"dependsOn": ["^build", "$CI", "$TURBO_CACHE_KEY"],
+			"outputs": []
+		}
   },
-  "baseBranch": "origin/main"
+  "baseBranch": "origin/main",
+	"globalDependencies": [".eslintrc.json", ".prettierrc", "tsconfig.json"]
 }
