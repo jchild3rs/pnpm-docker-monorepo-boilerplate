@@ -21,6 +21,11 @@ jobs:
       - uses: pnpm/action-setup@v2.2.2
         with:
           version: ${{ env.PNPM_VERSION }}
+      - uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/setup-node@v3
         with:
           node-version: '16.x'
