@@ -12,7 +12,7 @@ env:
   TURBO_TEAM: jchilders
 
 jobs:
-  Lint:
+  Lint-Test-Build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -27,22 +27,4 @@ jobs:
           scope: "@rentpath"
           token: ${{ secrets.GPR_TOKEN }}
       - run: pnpm install --frozen-lockfile --prefer-offline
-      - run: pnpm turbo run lint --output-logs=new-only
-  Test:
-    runs-on: ubuntu-latest
-    env:
-      TURBO_CACHE_KEY: ${{ matrix.os }}-${{ matrix.node-version }}
-    steps:
-      - uses: actions/checkout@v2
-      - uses: pnpm/action-setup@v2.2.2
-        with:
-          version: ${{ env.PNPM_VERSION }}
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '16.x'
-          cache: pnpm
-          registry-url: https://npm.pkg.github.com
-          scope: "@rentpath"
-          token: ${{ secrets.GPR_TOKEN }}
-      - run: pnpm install --frozen-lockfile --prefer-offline
-      - run: pnpm turbo run test --output-logs=new-only
+      - run: pnpm turbo run lint test build --output-logs=new-only
