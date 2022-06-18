@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "docker:build": "docker build ../.. -f ./Dockerfile -t ghcr.io/jchild3rs/web:$BRANCH_TAG",
+    "docker:build": "docker build ../.. -f ./Dockerfile -t ghcr.io/jchild3rs/web:$BRANCH_TAG --build-arg GPR_USER_PAT=$GPR_USER_PAT",
     "docker:push": "docker push ghcr.io/jchild3rs/web:$BRANCH_TAG",
     "start": "next start",
     "lint": "next lint",

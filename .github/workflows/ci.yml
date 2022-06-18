@@ -10,6 +10,7 @@ env:
   PNPM_VERSION: 7.1.6
   TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
   TURBO_TEAM: jchilders
+  GPR_USER_PAT: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   Test-Build-Deploy:
@@ -42,7 +43,6 @@ jobs:
             | cut -c 1-32 \
             | sed -e 's/[^a-z0-9]*$//'
           )
-
           echo "::set-output name=branch_tag::${BRANCH_TAG}"
 
           VERSION=$( date -u '+%Y%m%d' )-${{ github.run_number || 0 }}-${SHORT_SHA}
@@ -54,7 +54,7 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - run: pnpm turbo run docker:build --output-logs=new-only -- --build-arg GPR_USER_PAT=${{ secrets.GITHUB_TOKEN }}
+      - run: pnpm turbo run docker:build --output-logs=new-only
         env:
           BRANCH_TAG:  ${{ steps.vars.outputs.branch_tag }}
           VERSION: ${{ steps.vars.outputs.version }}
