@@ -19,6 +19,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: pnpm/action-setup@v2.2.2
+        with:
+          version: 7
       - uses: actions/setup-node@v3
         with:
           node-version: '16.x'
@@ -33,14 +35,16 @@ jobs:
     env:
       TURBO_CACHE_KEY: ${{ matrix.os }}-${{ matrix.node-version }}
     steps:
-    - uses: actions/checkout@v2
-    - uses: pnpm/action-setup@v2.2.2
-    - uses: actions/setup-node@v3
-      with:
-        node-version: '16.x'
-        cache: pnpm
-        registry-url: https://npm.pkg.github.com
-        scope: "@rentpath"
-        token: ${{ secrets.GPR_TOKEN }}
-    - run: pnpm install --frozen-lockfile --prefer-offline
-    - run: pnpm test
+      - uses: actions/checkout@v2
+      - uses: pnpm/action-setup@v2.2.2
+        with:
+          version: 7
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          cache: pnpm
+          registry-url: https://npm.pkg.github.com
+          scope: "@rentpath"
+          token: ${{ secrets.GPR_TOKEN }}
+      - run: pnpm install --frozen-lockfile --prefer-offline
+      - run: pnpm test
