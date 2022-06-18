@@ -8,8 +8,8 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
-    "docker:build": "docker build ../.. -f ./Dockerfile --build-arg APP=api -t api:$BRANCH_TAG -t api:$VERSION --build-arg GPR_USER_PAT=$GPR_USER_PAT",
-    "docker:push": "docker push api:$BRANCH_TAG",
+    "docker:build": "docker build ../.. -f ./Dockerfile --build-arg APP=api --build-arg GPR_USER_PAT=$GPR_USER_PAT -t ghcr.io/jchild3rs/api:$BRANCH_TAG -t ghcr.io/jchild3rs/api:$VERSION",
+    "docker:push": "docker push ghcr.io/jchild3rs/api:$BRANCH_TAG && docker push ghcr.io/jchild3rs/api:$VERSION",
     "dev": "PORT=4000 nest start --watch --debug",
     "start": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
