@@ -19,7 +19,7 @@
       "cache": false
     },
 		"test": {
-			"dependsOn": ["^build", "$CI", "$TURBO_CACHE_KEY"],
+			"dependsOn": ["$CI", "$TURBO_CACHE_KEY"],
 			"outputs": []
 		}
   },

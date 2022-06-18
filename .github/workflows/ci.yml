@@ -45,4 +45,4 @@ jobs:
           scope: "@rentpath"
           token: ${{ secrets.GPR_TOKEN }}
       - run: pnpm install --frozen-lockfile --prefer-offline
-      - run: pnpm turbo run build --output-logs=new-only
+      - run: pnpm turbo run test --output-logs=new-only
