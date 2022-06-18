@@ -30,23 +30,22 @@ jobs:
         id: vars
         run: |
           BRANCH_NAME=$( echo ${{ github.event.inputs.branch || github.head_ref || github.ref }} | sed -E -e 's/refs\/heads\/(.*)/\1/g' )
-          echo "BRANCH_NAME=${BRANCH_NAME}" >> $GITHUB_ENV
           echo "::set-output name=branch_name::${BRANCH_NAME}"
-
-          BRANCH_TAG=$(
-            echo "${BRANCH_NAME}" \
-            | sed -e 's/[^a-zA-Z0-9]/-/g' \
-            | tr '[:upper:]' '[:lower:]' \
-            | cut -c 1-32 \
-            | sed -e 's/[^a-z0-9]*$//'
-          )
           
           if [[ ${{ contains(github.ref, 'main') }} = true ]];
-            echo "::set-output name=branch_tag::latest"
+            BRANCH_TAG=latest
           else
-            echo "::set-output name=branch_tag::${BRANCH_TAG}"
+            BRANCH_TAG=$(
+              echo "${BRANCH_NAME}" \
+              | sed -e 's/[^a-zA-Z0-9]/-/g' \
+              | tr '[:upper:]' '[:lower:]' \
+              | cut -c 1-32 \
+              | sed -e 's/[^a-z0-9]*$//'
+            )
           fi
           
+          echo "::set-output name=branch_tag::${BRANCH_TAG}"
+
           VERSION=$( date -u '+%Y%m%d' )-${{ github.run_number || 0 }}-${SHORT_SHA}
           echo "::set-output name=version::${VERSION}"
       - run: pnpm install --frozen-lockfile --prefer-offline
