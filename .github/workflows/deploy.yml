@@ -1,22 +1,20 @@
-name: CI
+name: Deploy
 
 on:
   push:
     branches:
       - main
-  pull_request:
 
 env:
+  TURBO_CACHE_KEY: ubuntu-latest-16 # reuse cache key from ci workflow
   PNPM_VERSION: 7.1.6
   TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
   TURBO_TEAM: jchilders
   GPR_USER_PAT: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
-  Test-Build-Deploy:
+  tag-and-publish:
     runs-on: ubuntu-latest
-    env:
-      TURBO_CACHE_KEY: ${{ matrix.os }}-${{ matrix.node-version }}
     steps:
       - uses: actions/checkout@v2
       - uses: pnpm/action-setup@v2.2.2
@@ -50,7 +48,7 @@ jobs:
           VERSION=$( date -u '+%Y%m%d' )-${{ github.run_number || 0 }}-${SHORT_SHA}
           echo "::set-output name=version::${VERSION}"
       - run: pnpm install --frozen-lockfile --prefer-offline
-      - run: pnpm turbo run lint test build --output-logs=new-only
+      - run: pnpm turbo build --output-logs=new-only
       - uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
         with:
           registry: ghcr.io
@@ -58,9 +56,9 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - run: pnpm turbo run docker:build --output-logs=new-only
         env:
-          BRANCH_TAG:  ${{ steps.vars.outputs.branch_tag }}
+          BRANCH_TAG: main
           VERSION: ${{ steps.vars.outputs.version }}
       - run: pnpm turbo run docker:push --output-logs=new-only
         env:
-          BRANCH_TAG:  ${{ steps.vars.outputs.branch_tag }}
+          BRANCH_TAG: main
           VERSION: ${{ steps.vars.outputs.version }}
