@@ -5,11 +5,11 @@
       "outputs": ["dist/**", ".next/**", "build/**"]
     },
     "docker:build": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["^build", "$BRANCH_TAG"],
       "outputs": []
     },
     "docker:push": {
-      "dependsOn": ["^docker:build"],
+      "dependsOn": ["^docker:build", "$BRANCH_TAG"],
       "outputs": []
     },
     "lint": {
