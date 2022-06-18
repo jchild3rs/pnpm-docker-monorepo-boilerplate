@@ -29,6 +29,9 @@ jobs:
       - name: set vars
         id: vars
         run: |
+          SHORT_SHA=$( git rev-parse --short HEAD )
+          echo "::set-output name=short_sha::${SHORT_SHA}"
+
           BRANCH_NAME=$( echo ${{ github.event.inputs.branch || github.head_ref || github.ref }} | sed -E -e 's/refs\/heads\/(.*)/\1/g' )
           echo "::set-output name=branch_name::${BRANCH_NAME}"
           
@@ -39,7 +42,7 @@ jobs:
             | cut -c 1-32 \
             | sed -e 's/[^a-z0-9]*$//'
           )
-          
+
           echo "::set-output name=branch_tag::${BRANCH_TAG}"
 
           VERSION=$( date -u '+%Y%m%d' )-${{ github.run_number || 0 }}-${SHORT_SHA}
