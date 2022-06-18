@@ -6,6 +6,8 @@ export default function MyApp({
   Component,
   pageProps,
 }: AppProps) {
+  console.log('web change!');
+  
   return (
     <>
       <Header />
