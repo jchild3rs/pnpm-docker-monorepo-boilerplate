@@ -56,9 +56,9 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - run: pnpm turbo run docker:build --output-logs=new-only
         env:
-          BRANCH_TAG: main
+          BRANCH_TAG: latest
           VERSION: ${{ steps.vars.outputs.version }}
       - run: pnpm turbo run docker:push --output-logs=new-only
         env:
-          BRANCH_TAG: main
+          BRANCH_TAG: latest
           VERSION: ${{ steps.vars.outputs.version }}
