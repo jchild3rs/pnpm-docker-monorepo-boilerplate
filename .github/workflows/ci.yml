@@ -18,7 +18,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: pnpm/action-setup@v2.2.2
         with:
-          version: $PNPM_VERSION
+          version: ${{ env.PNPM_VERSION }}
       - uses: actions/setup-node@v3
         with:
           node-version: '16.x'
@@ -36,7 +36,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: pnpm/action-setup@v2.2.2
         with:
-          version: $PNPM_VERSION
+          version: ${{ env.PNPM_VERSION }}
       - uses: actions/setup-node@v3
         with:
           node-version: '16.x'
