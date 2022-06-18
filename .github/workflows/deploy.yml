@@ -29,5 +29,6 @@ jobs:
           scope: "@rentpath"
           token: ${{ secrets.GPR_TOKEN }}
       - run: pnpm install --frozen-lockfile --prefer-offline
+      - run: pnpm turbo run build
       - run: pnpm turbo run docker:build -- --build-arg GPR_USER_PAT=${{ secrets.GITHUB_TOKEN }}
       - run: pnpm turbo run docker:push
