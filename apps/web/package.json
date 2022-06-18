@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "docker:build": "docker build ../.. -f ./Dockerfile -t web:$BRANCH_TAG -t web:$VERSION --build-arg GPR_USER_PAT=$GPR_USER_PAT",
-    "docker:push": "docker push ghcr.io/jchild3rs/web:$BRANCH_TAG",
+    "docker:push": "docker push web:$BRANCH_TAG",
     "start": "next start",
     "lint": "next lint",
     "test": "jest --passWithNoTests"
