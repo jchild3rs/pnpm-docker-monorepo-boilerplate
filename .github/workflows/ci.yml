@@ -1,5 +1,11 @@
 name: CI
 
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
 env:
   TURBO_VERSION: 1.2.14
   PNPM_VERSION: 7.1.6
@@ -7,50 +13,34 @@ env:
   TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
   TURBO_TEAM: jchilders
 
-on:
-  pull_request:
-    types: [opened, synchronize, reopened]
-
 jobs:
-  lint-test-build-deploy:
+  Lint:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Log in to the Container registry
-        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+      - uses: actions/checkout@v2
+      - uses: pnpm/action-setup@v2.2.2
+      - uses: actions/setup-node@v3
         with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          node-version-file: ".nvmrc"
+          node-version: '16.x'
+          cache: pnpm
           registry-url: https://npm.pkg.github.com
           scope: "@rentpath"
           token: ${{ secrets.GPR_TOKEN }}
-
-      - name: Install pnpm
-        run: npm i -g pnpm@${PNPM_VERSION}
-
-      - id: get-store-path
-        run: echo ::set-output name=STORE_PATH::$(pnpm store path)
-
-      - uses: actions/cache@v3
-        id: cache-pnpm-store
-        with:
-          path: ${{ steps.get-store-path.outputs.STORE_PATH }}
-          key: pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: |
-            pnpm-store-
-            pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile --prefer-offline
-
-      - run: pnpm lint --output-logs=new-only
-      - run: pnpm test --output-logs=new-only
-      - run: pnpm build --output-logs=new-only
+      - run: pnpm install --frozen-lockfile --prefer-offline
+      - run: pnpm turbo run lint
+  Test:
+    runs-on: ubuntu-latest
+    env:
+      TURBO_CACHE_KEY: ${{ matrix.os }}-${{ matrix.node-version }}
+    steps:
+    - uses: actions/checkout@v2
+    - uses: pnpm/action-setup@v2.2.2
+    - uses: actions/setup-node@v3
+      with:
+        node-version: '16.x'
+        cache: pnpm
+        registry-url: https://npm.pkg.github.com
+        scope: "@rentpath"
+        token: ${{ secrets.GPR_TOKEN }}
+    - run: pnpm install --frozen-lockfile --prefer-offline
+    - run: pnpm test
