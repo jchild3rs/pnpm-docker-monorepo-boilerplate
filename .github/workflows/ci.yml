@@ -51,4 +51,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --prefer-offline
 
-      - run: pnpm ci
+      - run: pnpm lint --output-logs=new-only
+      - run: pnpm test --output-logs=new-only
+      - run: pnpm build --output-logs=new-only

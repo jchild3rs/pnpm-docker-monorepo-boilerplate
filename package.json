@@ -9,11 +9,10 @@
   "scripts": {
     "build": "turbo run build",
     "test": "turbo run test",
-    "docker": "DOCKER_BUILDKIT=1 turbo run docker --output-logs=new-only --cache-dir=.turbo",
-    "publish": "DOCKER_BUILDKIT=1 turbo run publish --output-logs=new-only --cache-dir=.turbo",
+    "docker": "DOCKER_BUILDKIT=1 turbo run docker --output-logs=new-only",
+    "publish": "DOCKER_BUILDKIT=1 turbo run publish --output-logs=new-only",
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
-    "ci": "turbo run lint test build docker publish --output-logs=new-only --cache-dir=.turbo",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "engines": {
