@@ -4,12 +4,12 @@ env:
   TURBO_VERSION: 1.2.14
   PNPM_VERSION: 7.1.6
   GPR_USER_PAT: ${{ secrets.GITHUB_TOKEN }}
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  TURBO_TEAM: jchilders
 
 on:
   pull_request:
     types: [opened, synchronize, reopened]
-  push:
-    branches: [main]
 
 jobs:
   lint-test-build-deploy:
@@ -17,8 +17,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 25
 
       - name: Log in to the Container registry
         uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
@@ -52,21 +50,5 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --prefer-offline
-
-      - name: Use `main` Turbo Cache
-        if: github.ref != 'refs/heads/main'
-        id: turbo-cache-get
-        uses: actions/cache@v2
-        with:
-          path: .turbo
-          key: turbo-${{ github.event.pull_request.base.sha }}
-
-      - name: Update Turbo Cache
-        if: github.ref == 'refs/heads/main'
-        id: turbo-cache-set
-        uses: actions/cache@v2
-        with:
-          path: .turbo
-          key: turbo-${{ github.sha }}
 
       - run: pnpm ci

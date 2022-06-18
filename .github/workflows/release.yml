@@ -1,5 +1,12 @@
 name: Release
 
+env:
+  TURBO_VERSION: 1.2.14
+  PNPM_VERSION: 7.1.6
+  GPR_USER_PAT: ${{ secrets.GITHUB_TOKEN }}
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  TURBO_TEAM: jchilders
+
 on:
   push:
     branches:
@@ -14,8 +21,6 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2
-        with:
-          fetch-depth: 25
 
       - name: Setup Node
         uses: actions/setup-node@v3
@@ -42,3 +47,5 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --prefer-offline
+
+      - run: pnpm ci
