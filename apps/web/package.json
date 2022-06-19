@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "release": "APP=web ../../scripts/release.sh",
+    "publish": "APP=web ../../scripts/publish-app.sh",
     "check": "tsc --noEmit",
     "start": "next start",
     "lint": "next lint",

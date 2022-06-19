@@ -87,8 +87,7 @@ jobs:
             "sha:               ${{ steps.vars.outputs.sha }}" \
             "short_sha:         ${{ steps.vars.outputs.short_sha }}" \
             "version:           ${{ steps.vars.outputs.version }}" \
-      - name: Tag and Push to Docker Registry
-        run: pnpm turbo run release
+      - run: pnpm turbo run publish --filter=./apps/*
         env:
           VERSION: ${{ steps.vars.outputs.version }}
           BRANCH_TAG: ${{ steps.vars.outputs.branch_tag }}
