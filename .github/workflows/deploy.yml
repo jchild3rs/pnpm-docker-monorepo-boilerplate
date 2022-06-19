@@ -34,32 +34,45 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Set Vars
+      - name: set variables
         id: vars
         run: |
-          SHORT_SHA=$( git rev-parse --short HEAD )
-          echo "::set-output name=short_sha::${SHORT_SHA}"
-
-          BRANCH_NAME=$(${{ github.event.inputs.branch || github.head_ref || github.ref }} | sed -E -e 's/refs\/heads\/(.*)/\1/g' )
+          OWNER=$( echo ${{ github.repository }} | sed -E -e 's/\/.+$//' )
+          echo "OWNER=${OWNER}" >> $GITHUB_ENV
+          echo "::set-output name=owner::${OWNER}"
+          REPO=$( echo ${{ github.repository }} | sed -E -e 's/^[^\/]+\///')
+          echo "REPO=${REPO}" >> $GITHUB_ENV
+          echo "::set-output name=repo::${REPO}"
+          BRANCH_NAME=$( echo ${{ github.event.inputs.branch || github.head_ref || github.ref }} | sed -E -e 's/refs\/heads\/(.*)/\1/g' )
+          echo "BRANCH_NAME=${BRANCH_NAME}" >> $GITHUB_ENV
           echo "::set-output name=branch_name::${BRANCH_NAME}"
-
-          if [ "$BRANCH_NAME" == "main" ];
-          then
-            BRANCH_TAG="latest"
-          else
-            BRANCH_TAG=$(
-              echo "${BRANCH_NAME}" \
-              | sed -e 's/[^a-zA-Z0-9]/-/g' \
-              | tr '[:upper:]' '[:lower:]' \
-              | cut -c 1-32 \
-              | sed -e 's/[^a-z0-9]*$//'
-            )
-          fi
+          BRANCH_TAG=$(
+            echo "${BRANCH_NAME}" \
+            | sed -e 's/[^a-zA-Z0-9]/-/g' \
+            | tr '[:upper:]' '[:lower:]' \
+            | cut -c 1-32 \
+            | sed -e 's/[^a-z0-9]*$//'
+          )
+          echo "BRANCH_TAG=${BRANCH_TAG}" >> $GITHUB_ENV
           echo "::set-output name=branch_tag::${BRANCH_TAG}"
-
-          VERSION=$( date -u '+%Y%m%d' )-$SHORT_SHA
+          CONTEXT="${{ github.event.inputs.context || 'ci' }}"
+          echo "CONTEXT=${CONTEXT}" >> $GITHUB_ENV
+          echo "::set-output name=context::${CONTEXT}"
+          REF="${{ github.event.inputs.branch || github.head_ref || github.ref }}"
+          echo "REF=${REF}" >> $GITHUB_ENV
+          echo "::set-output name=ref::${REF}"
+          SHA=$( git rev-parse HEAD )
+          echo "SHA=${SHA}" >> $GITHUB_ENV
+          echo "::set-output name=sha::${SHA}"
+          SHORT_SHA=$( git rev-parse --short HEAD )
+          echo "SHORT_SHA=${SHORT_SHA}" >> $GITHUB_ENV
+          echo "::set-output name=short_sha::${SHORT_SHA}"
+          VERSION=$( date -u '+%Y%m%d' )-${{ github.run_number || 0 }}-${SHORT_SHA}
+          echo "VERSION=${VERSION}" >> $GITHUB_ENV
           echo "::set-output name=version::${VERSION}"
-
+          ENVIRONMENT_NAME=$( BRANCH_NAME=${BRANCH_NAME} ./.github/workflows/scripts/get_ci_deploy_env_name.sh )
+          echo "ENVIRONMENT_NAME=${ENVIRONMENT_NAME}" >> $GITHUB_ENV
+          echo "::set-output name=environment_name::${ENVIRONMENT_NAME}"
       - name: log variables
         run: |
           ./scripts/log.sh \
@@ -68,7 +81,6 @@ jobs:
             "branch_name:       ${{ steps.vars.outputs.branch_name }}" \
             "branch_tag:        ${{ steps.vars.outputs.branch_tag }}" \
             "context:           ${{ steps.vars.outputs.context }}" \
-            "image:             ${{ steps.vars.outputs.image }}" \
             "cache_from:        ${{ steps.vars.outputs.cache_from }}" \
             "ref:               ${{ steps.vars.outputs.ref }}" \
             "sha:               ${{ steps.vars.outputs.sha }}" \
