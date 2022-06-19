@@ -8,20 +8,28 @@
   ],
   "scripts": {
     "build": "turbo run build",
-    "test": "turbo run test",
+    "dev": "turbo run dev --parallel",
     "docker:build": "turbo run docker:build",
     "docker:push": "turbo run docker:push",
-    "dev": "turbo run dev --parallel",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "check": "turbo run check",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "test": "turbo run test",
+    "test:coverage": "turbo run test -- --coverage"
   },
+  "packageManager": "pnpm@7.3.0",
   "engines": {
-    "npm": ">=7.0.0",
-    "node": ">=14.0.0"
+    "pnpm": "^7.0.0",
+    "node": "16.14.2"
   },
-  "packageManager": "pnpm@6.32.9",
   "devDependencies": {
-    "rimraf": "^3.0.2",
+    "prettier": "^2.7.1",
     "turbo": "latest"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "all",
+    "semi": false,
+    "printWidth": 65
   }
 }

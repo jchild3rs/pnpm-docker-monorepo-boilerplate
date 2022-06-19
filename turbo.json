@@ -12,17 +12,19 @@
       "dependsOn": ["^docker:build", "$BRANCH_TAG"],
       "outputs": []
     },
+    "check": {
+      "outputs": []
+    },
     "lint": {
       "outputs": []
     },
     "dev": {
       "cache": false
     },
-		"test": {
-			"dependsOn": ["$CI", "$TURBO_CACHE_KEY"],
-			"outputs": []
-		}
+    "test": {
+      "dependsOn": ["$CI", "$TURBO_CACHE_KEY"],
+      "outputs": []
+    }
   },
-  "baseBranch": "origin/main",
-	"globalDependencies": [".eslintrc.json", ".prettierrc", "tsconfig.json"]
+  "baseBranch": "origin/main"
 }

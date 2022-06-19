@@ -5,6 +5,7 @@
   "types": "./index.tsx",
   "private": true,
   "scripts": {
+    "check": "tsc --noEmit",
     "lint": "eslint *.ts*"
   },
   "devDependencies": {
@@ -14,6 +15,6 @@
     "eslint-config-next-custom": "workspace:*",
     "react": "^18.1.0",
     "tsconfig": "workspace:*",
-    "typescript": "^4.5.2"
+    "typescript": "^4.7.2"
   }
 }

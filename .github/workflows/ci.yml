@@ -50,7 +50,7 @@ jobs:
           VERSION=$( date -u '+%Y%m%d' )-${{ github.run_number || 0 }}-${SHORT_SHA}
           echo "::set-output name=version::${VERSION}"
       - run: pnpm install --frozen-lockfile --prefer-offline
-      - run: pnpm turbo run lint test build --output-logs=new-only
+      - run: pnpm turbo run check lint test build --output-logs=new-only
       - uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
         with:
           registry: ghcr.io

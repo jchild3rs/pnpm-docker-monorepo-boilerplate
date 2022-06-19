@@ -6,7 +6,7 @@ export default function MyApp({
   Component,
   pageProps,
 }: AppProps) {
-  console.log('a web change');
+  console.log('a web change')
 
   return (
     <>
