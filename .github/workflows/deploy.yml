@@ -24,7 +24,7 @@ jobs:
           node-version: '16.x'
           cache: pnpm
           registry-url: https://npm.pkg.github.com
-          scope: "@rentpath"
+          scope: '@rentpath'
           token: ${{ secrets.GPR_TOKEN }}
       - run: pnpm install --frozen-lockfile --prefer-offline
       - run: pnpm turbo run build --output-logs=new-only
@@ -33,6 +33,52 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - run: pnpm turbo run release --output-logs=new-only
+
+      - name: Set Vars
+        id: vars
+        run: |
+          SHORT_SHA=$( git rev-parse --short HEAD )
+          echo "::set-output name=short_sha::${SHORT_SHA}"
+
+          BRANCH_NAME=$(${{ github.event.inputs.branch || github.head_ref || github.ref }} | sed -E -e 's/refs\/heads\/(.*)/\1/g' )
+          echo "::set-output name=branch_name::${BRANCH_NAME}"
+
+          if [ "$BRANCH_NAME" == "main" ];
+          then
+            BRANCH_TAG="latest"
+          else
+            BRANCH_TAG=$(
+              echo "${BRANCH_NAME}" \
+              | sed -e 's/[^a-zA-Z0-9]/-/g' \
+              | tr '[:upper:]' '[:lower:]' \
+              | cut -c 1-32 \
+              | sed -e 's/[^a-z0-9]*$//'
+            )
+          fi
+          echo "::set-output name=branch_tag::${BRANCH_TAG}"
+
+          VERSION=$( date -u '+%Y%m%d' )-$SHORT_SHA
+          echo "::set-output name=version::${VERSION}"
+
+      - name: log variables
+        run: |
+          ./scripts/log.sh \
+            "owner:             ${{ steps.vars.outputs.owner }}" \
+            "repo:              ${{ steps.vars.outputs.repo }}" \
+            "branch_name:       ${{ steps.vars.outputs.branch_name }}" \
+            "branch_tag:        ${{ steps.vars.outputs.branch_tag }}" \
+            "context:           ${{ steps.vars.outputs.context }}" \
+            "image:             ${{ steps.vars.outputs.image }}" \
+            "cache_from:        ${{ steps.vars.outputs.cache_from }}" \
+            "ref:               ${{ steps.vars.outputs.ref }}" \
+            "sha:               ${{ steps.vars.outputs.sha }}" \
+            "short_sha:         ${{ steps.vars.outputs.short_sha }}" \
+            "version:           ${{ steps.vars.outputs.version }}" \
+            "environment_name: ${{ steps.vars.outputs.environment_name }}"
+      - name: Tag and Push to Docker Registry
+        run: pnpm turbo run release
         env:
+          VERSION: ${{ steps.vars.outputs.version }}
+          BRANCH_TAG: ${{ steps.vars.outputs.branch_tag }}
+          TAG_PREFIX: ghcr:io/jchild3rs
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
