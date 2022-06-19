@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "docker:build": "docker build ../.. -f ./Dockerfile --build-arg APP=web --build-arg GPR_USER_PAT=$GPR_USER_PAT -t ghcr.io/jchild3rs/web:$BRANCH_TAG -t ghcr.io/jchild3rs/web:$VERSION",
-    "docker:push": "docker push ghcr.io/jchild3rs/web:$BRANCH_TAG && docker push ghcr.io/jchild3rs/web:$VERSION",
+    "release": "APP=web ../../scripts/release.sh",
     "check": "tsc --noEmit",
     "start": "next start",
     "lint": "next lint",

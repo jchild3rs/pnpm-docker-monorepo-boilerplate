@@ -4,12 +4,8 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**", ".next/**", "build/**"]
     },
-    "docker:build": {
-      "dependsOn": ["^build", "$BRANCH_TAG"],
-      "outputs": []
-    },
-    "docker:push": {
-      "dependsOn": ["^docker:build", "$BRANCH_TAG"],
+    "release": {
+      "dependsOn": ["build", "$BRANCH_TAG"],
       "outputs": []
     },
     "check": {

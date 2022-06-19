@@ -9,13 +9,10 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
-    "docker:build": "turbo run docker:build",
-    "docker:push": "turbo run docker:push",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "check": "turbo run check",
     "lint": "turbo run lint",
-    "test": "turbo run test",
-    "test:coverage": "turbo run test -- --coverage"
+    "test": "turbo run test"
   },
   "packageManager": "pnpm@7.3.0",
   "engines": {
