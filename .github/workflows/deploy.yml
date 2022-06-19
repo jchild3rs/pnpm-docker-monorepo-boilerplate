@@ -70,9 +70,6 @@ jobs:
           VERSION=$( date -u '+%Y%m%d' )-${{ github.run_number || 0 }}-${SHORT_SHA}
           echo "VERSION=${VERSION}" >> $GITHUB_ENV
           echo "::set-output name=version::${VERSION}"
-          ENVIRONMENT_NAME=$( BRANCH_NAME=${BRANCH_NAME} ./.github/workflows/scripts/get_ci_deploy_env_name.sh )
-          echo "ENVIRONMENT_NAME=${ENVIRONMENT_NAME}" >> $GITHUB_ENV
-          echo "::set-output name=environment_name::${ENVIRONMENT_NAME}"
       - name: log variables
         run: |
           ./scripts/log.sh \
@@ -86,7 +83,6 @@ jobs:
             "sha:               ${{ steps.vars.outputs.sha }}" \
             "short_sha:         ${{ steps.vars.outputs.short_sha }}" \
             "version:           ${{ steps.vars.outputs.version }}" \
-            "environment_name: ${{ steps.vars.outputs.environment_name }}"
       - name: Tag and Push to Docker Registry
         run: pnpm turbo run release
         env:
