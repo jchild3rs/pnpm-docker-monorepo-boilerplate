@@ -53,6 +53,10 @@ jobs:
             | cut -c 1-32 \
             | sed -e 's/[^a-z0-9]*$//'
           )
+          
+          if [[ ${{ contains(github.ref, 'main') }} = true ]]; then
+            BRANCH_TAG=latest
+          fi
           echo "BRANCH_TAG=${BRANCH_TAG}" >> $GITHUB_ENV
           echo "::set-output name=branch_tag::${BRANCH_TAG}"
           CONTEXT="${{ github.event.inputs.context || 'ci' }}"
