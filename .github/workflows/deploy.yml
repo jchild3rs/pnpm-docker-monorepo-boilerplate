@@ -92,5 +92,5 @@ jobs:
         env:
           VERSION: ${{ steps.vars.outputs.version }}
           BRANCH_TAG: ${{ steps.vars.outputs.branch_tag }}
-          TAG_PREFIX: ghcr:io/jchild3rs
+          TAG_PREFIX: ghcr.io/jchild3rs
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
