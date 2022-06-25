@@ -1,5 +1,6 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { ReactNode, Suspense } from 'react'
+import { Page } from 'ui'
 
 export default function Layout({
   children,
@@ -9,7 +10,7 @@ export default function Layout({
   children: ReactNode
 }) {
   return (
-    <>
+    <Page>
       <div className="min-h-full">
         <header className="bg-white shadow">
           <div className="mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
@@ -20,6 +21,6 @@ export default function Layout({
           <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">{children}</div>
         </main>
       </div>
-    </>
+    </Page>
   )
 }
