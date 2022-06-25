@@ -40,7 +40,7 @@ export const Button = ({
     <button
       type="button"
       className={[
-        'ml-4 flex h-24 border-2 border-gray-300 p-3 text-gray-700 shadow-md ',
+        'ml-4 flex h-24 border-2 border-gray-300 p-3 text-gray-700 shadow-md',
         `storybook-button--${size}`,
         mode
       ].join(' ')}
