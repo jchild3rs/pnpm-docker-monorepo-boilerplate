@@ -32,7 +32,6 @@
     "jest-environment-jsdom": "^28.1.1",
     "next-transpile-modules": "9.0.0",
     "postcss": "^8.4.14",
-    "prettier-plugin-tailwindcss": "^0.1.11",
     "sass": "^1.52.3",
     "tailwind-preset-base": "workspace:*",
     "tailwindcss": "^3.1.2",

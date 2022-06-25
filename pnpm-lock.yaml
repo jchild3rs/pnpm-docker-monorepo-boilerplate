@@ -167,7 +167,6 @@ importers:
       next: 12.1.7-canary.39
       next-transpile-modules: 9.0.0
       postcss: ^8.4.14
-      prettier-plugin-tailwindcss: ^0.1.11
       react: ^18.1.0
       react-dom: ^18.1.0
       sass: ^1.52.3
@@ -195,7 +194,6 @@ importers:
       jest-environment-jsdom: 28.1.1
       next-transpile-modules: 9.0.0
       postcss: 8.4.14
-      prettier-plugin-tailwindcss: 0.1.11
       sass: 1.53.0
       tailwind-preset-base: link:../../packages/tailwind-present-base
       tailwindcss: 3.1.4
@@ -14342,13 +14340,6 @@ packages:
     dependencies:
       fast-diff: 1.2.0
     dev: false
-
-  /prettier-plugin-tailwindcss/0.1.11:
-    resolution: {integrity: sha512-a28+1jvpIZQdZ/W97wOXb6VqI762MKE/TxMMuibMEHhyYsSxQA8Ek30KObd5kJI2HF1ldtSYprFayXJXi3pz8Q==}
-    engines: {node: '>=12.17.0'}
-    peerDependencies:
-      prettier: '>=2.2.0'
-    dev: true
 
   /prettier-plugin-tailwindcss/0.1.11_prettier@2.7.1:
     resolution: {integrity: sha512-a28+1jvpIZQdZ/W97wOXb6VqI762MKE/TxMMuibMEHhyYsSxQA8Ek30KObd5kJI2HF1ldtSYprFayXJXi3pz8Q==}
