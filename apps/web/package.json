@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "docker:build": "docker build ../.. -f ./Dockerfile --build-arg APP=web --build-arg GPR_USER_PAT=$GPR_USER_PAT -t ghcr.io/jchild3rs/web:$BRANCH_TAG -t ghcr.io/jchild3rs/web:$VERSION",
-    "docker:push": "docker push ghcr.io/jchild3rs/web:$BRANCH_TAG && docker push ghcr.io/jchild3rs/web:$VERSION",
+    "publish": "APP=web ../../scripts/publish-app.sh",
+    "check": "tsc --noEmit",
     "start": "next start",
     "lint": "next lint",
     "test": "jest --passWithNoTests"
@@ -34,6 +34,6 @@
     "sass": "^1.52.3",
     "tailwindcss": "^3.1.2",
     "tsconfig": "workspace:*",
-    "typescript": "^4.5.3"
+    "typescript": "^4.7.2"
   }
 }
