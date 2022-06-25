@@ -13,7 +13,7 @@
   ],
   "scripts": {
     "build": "turbo run build",
-    "ci": "turbo run lint test build --output-logs=new-only",
+    "ci": "turbo run check lint test build --output-logs=new-only",
     "dev": "turbo run dev --parallel",
     "dev:api": "turbo run dev --filter=api...",
     "dev:docs": "turbo run dev --filter=docs...",

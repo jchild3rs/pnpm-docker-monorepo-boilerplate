@@ -1,20 +1,20 @@
 {
   "$schema": "https://turborepo.org/schema.json",
   "pipeline": {
-    "build": {
-      "dependsOn": ["^build"]
-    },
-    "lint": {
-      "outputs": []
-    },
     "dev": {
       "cache": false
+    },
+    "build": {
+      "dependsOn": ["^build"]
     },
     "check": {
       "outputs": []
     },
+    "lint": {
+      "outputs": []
+    },
     "test": {
-      "dependsOn": ["$CI", "$TURBO_CACHE_KEY"],
+      "dependsOn": ["^build"],
       "outputs": []
     }
   },
