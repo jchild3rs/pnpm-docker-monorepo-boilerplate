@@ -1,13 +1,13 @@
 module.exports = {
-  "stories": [
-    "../src/**/*.stories.mdx",
-    "../../../apps/**/*.stories.@(ts|tsx)",
-    "../../../packages/**/*.stories.@(ts|tsx)"
+  stories: [
+    '../src/**/*.stories.mdx',
+    '../../../apps/**/*.stories.@(ts|tsx)',
+    '../../../packages/**/*.stories.@(ts|tsx)'
   ],
-  "addons": [
-    "@storybook/addon-links",
-    "@storybook/addon-essentials",
-    "@storybook/addon-interactions",
+  addons: [
+    '@storybook/addon-links',
+    '@storybook/addon-essentials',
+    '@storybook/addon-interactions',
     {
       /**
        * Fix Storybook issue with PostCSS@8
@@ -16,13 +16,20 @@ module.exports = {
       name: '@storybook/addon-postcss',
       options: {
         postcssLoaderOptions: {
-          implementation: require('postcss'),
-        },
+          implementation: require('postcss')
+        }
+      }
+    },
+    {
+      name: "storybook-addon-turbo-build",
+      options: {
+        // Please refer below tables for available options
+        optimizationLevel: 3,
       },
     },
   ],
-  "framework": "@storybook/react",
-  "core": {
-    "builder": "@storybook/builder-webpack5"
+  framework: '@storybook/react',
+  core: {
+    builder: '@storybook/builder-webpack5'
   }
 }
