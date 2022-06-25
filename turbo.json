@@ -1,16 +1,10 @@
 {
+  "$schema": "https://turborepo.org/schema.json",
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
+			"inputs": ["src/**", "types/**"],
       "outputs": ["dist/**", ".next/**", "build/**"]
-    },
-    "docker:build": {
-      "dependsOn": ["^build", "$BRANCH_TAG"],
-      "outputs": []
-    },
-    "docker:push": {
-      "dependsOn": ["^docker:build", "$BRANCH_TAG"],
-      "outputs": []
     },
     "lint": {
       "outputs": []
@@ -24,5 +18,5 @@
 		}
   },
   "baseBranch": "origin/main",
-	"globalDependencies": [".eslintrc.json", ".prettierrc", "tsconfig.json"]
+	"globalDependencies": [".eslintrc.js", "jest.config.js", "tsconfig.json"]
 }
