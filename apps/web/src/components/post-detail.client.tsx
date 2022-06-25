@@ -8,12 +8,7 @@ export default function PostDetail(props: { post: Post }) {
   return (
     <>
       <p>{props.post.body}</p>
-      <img
-        width={600}
-        height={400}
-        src={props.post.image}
-        alt={props.post.title}
-      />
+      <img width={600} height={400} src={props.post.image} alt={props.post.title} />
       <button onClick={() => router.back()}>Back</button>
       <Link href="/">Home</Link>
     </>

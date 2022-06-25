@@ -3,7 +3,7 @@
 export enum PageTypeEnum {
   REACT_SERVER_COMPONENTS = 'rsc',
   SERVER_RENDERED = 'ssr',
-  STATICALLY_GENERATED = 'ssg',
+  STATICALLY_GENERATED = 'ssg'
 }
 
 // export type PageTypes = Record<PageTypeEnum, PageTypes>;
