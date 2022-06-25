@@ -4,6 +4,7 @@
   "private": true,
   "main": "tailwind.config.js",
   "files": [
+    "global.css",
     "tailwind.config.js"
   ]
 }
