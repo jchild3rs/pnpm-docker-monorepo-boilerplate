@@ -5,10 +5,6 @@
       "dependsOn": [
         "^build"
       ],
-      "inputs": [
-        "src/**",
-        "types/**"
-      ],
       "outputs": [
         "dist/**",
         ".next/**",

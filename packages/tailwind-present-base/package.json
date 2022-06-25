@@ -1,0 +1,9 @@
+{
+  "name": "tailwind-preset-base",
+  "version": "0.0.1",
+  "private": true,
+  "main": "tailwind.config.js",
+  "files": [
+    "tailwind.config.js"
+  ]
+}

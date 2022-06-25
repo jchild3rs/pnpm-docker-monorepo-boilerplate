@@ -4,52 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "start-storybook -p 6006",
-    "build": "build-storybook -c .storybook -o public/_storybook --quiet",
-    "publish": "APP=docs ../../scripts/publish-app.sh",
-    "check": "tsc --noEmit",
-    "start": "next start",
-    "lint": "next lint",
-    "test": "jest --passWithNoTests"
-  },
-  "dependencies": {
-    "@headlessui/react": "^1.6.4",
-    "@heroicons/react": "^1.0.6",
-    "next": "12.1.7-canary.39",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
-    "ui": "workspace:*"
+    "build": "build-storybook -c .storybook -o build --quiet"
   },
   "devDependencies": {
-    "@storybook/addon-a11y": "^6.5.9",
-    "@storybook/addon-actions": "^6.5.9",
-    "@storybook/addon-docs": "^6.5.9",
-    "@storybook/addon-essentials": "^6.5.9",
-    "@storybook/addon-interactions": "^6.5.9",
-    "@storybook/addon-links": "^6.5.9",
-    "@storybook/addon-postcss": "2.0.0",
-    "@storybook/addon-viewport": "^6.5.9",
-    "@storybook/addons": "^6.5.9",
-    "@storybook/builder-webpack5": "^6.5.9",
-    "@storybook/client-api": "^6.5.9",
-    "@storybook/core": "^6.5.9",
-    "@storybook/manager-webpack5": "^6.5.9",
-    "@storybook/react": "^6.5.9",
-    "@storybook/source-loader": "^6.5.9",
-    "@storybook/testing-library": "0.0.13",
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.3.0",
-    "@types/node": "^17.0.12",
-    "@types/react": "^18.0.12",
     "autoprefixer": "^10.4.7",
-    "eslint": "^8.17.0",
-    "eslint-config-next-custom": "workspace:*",
-    "jest": "28.0.3",
-    "jest-environment-jsdom": "^28.1.1",
-    "next-transpile-modules": "9.0.0",
     "postcss": "^8.4.14",
-    "sass": "^1.52.3",
     "tailwindcss": "^3.1.2",
-    "tsconfig": "workspace:*",
-    "typescript": "^4.7.2"
+    "tailwind-preset-base": "workspace:*"
   }
 }
