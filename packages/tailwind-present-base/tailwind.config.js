@@ -4,8 +4,10 @@
 module.exports = {
   theme: {
     extend: {
-      foo: 'green'
+      // global theme settings
     }
   },
-  plugins: [require('prettier-plugin-tailwindcss')]
+  plugins: [
+    // global plugins
+  ]
 }

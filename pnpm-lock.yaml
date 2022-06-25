@@ -239,10 +239,7 @@ importers:
       typescript: 4.7.4
 
   packages/tailwind-present-base:
-    specifiers:
-      prettier-plugin-tailwindcss: ^0.1.11
-    dependencies:
-      prettier-plugin-tailwindcss: 0.1.11
+    specifiers: {}
 
   packages/tsconfig:
     specifiers: {}
@@ -14351,6 +14348,7 @@ packages:
     engines: {node: '>=12.17.0'}
     peerDependencies:
       prettier: '>=2.2.0'
+    dev: true
 
   /prettier-plugin-tailwindcss/0.1.11_prettier@2.7.1:
     resolution: {integrity: sha512-a28+1jvpIZQdZ/W97wOXb6VqI762MKE/TxMMuibMEHhyYsSxQA8Ek30KObd5kJI2HF1ldtSYprFayXJXi3pz8Q==}
