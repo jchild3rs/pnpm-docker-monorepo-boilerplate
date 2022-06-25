@@ -2,6 +2,11 @@
   "name": "pnpm-docker-monorepo-boilerplate",
   "version": "0.0.0",
   "private": true,
+  "packageManager": "pnpm@7.3.0",
+  "engines": {
+    "pnpm": "^7.0.0",
+    "node": "16.14.2"
+  },
   "workspaces": [
     "apps/*",
     "packages/*"
@@ -9,25 +14,19 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
+    "dev:api": "turbo run dev --filter=api...",
+    "dev:web": "turbo run dev --filter=web...",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "check": "turbo run check",
     "lint": "turbo run lint",
     "test": "turbo run test"
   },
-  "packageManager": "pnpm@7.3.0",
-  "engines": {
-    "pnpm": "^7.0.0",
-    "node": "16.14.2"
-  },
   "devDependencies": {
+    "eslint": "^8.17.0",
     "prettier": "^2.7.1",
     "rimraf": "^3.0.2",
-    "turbo": "latest"
-  },
-  "prettier": {
-    "singleQuote": true,
-    "trailingComma": "all",
-    "semi": false,
-    "printWidth": 65
+    "turbo": "latest",
+    "typescript": "^4.7.2",
+    "webpack": "^5.0.0"
   }
 }

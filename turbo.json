@@ -2,9 +2,18 @@
   "$schema": "https://turborepo.org/schema.json",
   "pipeline": {
     "build": {
-      "dependsOn": ["^build"],
-			"inputs": ["src/**", "types/**"],
-      "outputs": ["dist/**", ".next/**", "build/**"]
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "src/**",
+        "types/**"
+      ],
+      "outputs": [
+        "dist/**",
+        ".next/**",
+        "build/**"
+      ]
     },
     "lint": {
       "outputs": []
@@ -12,11 +21,21 @@
     "dev": {
       "cache": false
     },
+    "check": {
+      "outputs": []
+    },
     "test": {
-      "dependsOn": ["$CI", "$TURBO_CACHE_KEY"],
+      "dependsOn": [
+        "$CI",
+        "$TURBO_CACHE_KEY"
+      ],
       "outputs": []
     }
   },
   "baseBranch": "origin/main",
-	"globalDependencies": [".eslintrc.js", "jest.config.js", "tsconfig.json"]
+  "globalDependencies": [
+    ".eslintrc.js",
+    "jest.config.js",
+    "tsconfig.json"
+  ]
 }

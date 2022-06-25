@@ -1,12 +1,12 @@
 {
   "name": "ui",
   "version": "0.0.0",
-  "main": "./index.tsx",
-  "types": "./index.tsx",
+  "main": "./src/index.tsx",
+  "types": "./src/index.tsx",
   "private": true,
   "scripts": {
     "check": "tsc --noEmit",
-    "lint": "eslint *.ts*"
+    "lint": "eslint \"{src,test}/**/*.tsx\""
   },
   "devDependencies": {
     "@types/react": "^18.0.12",
