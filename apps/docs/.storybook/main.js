@@ -8,6 +8,7 @@ module.exports = {
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
+    '@storybook/addon-a11y',
     {
       /**
        * Fix Storybook issue with PostCSS@8
@@ -21,11 +22,11 @@ module.exports = {
       }
     },
     {
-      name: "storybook-addon-turbo-build",
+      name: 'storybook-addon-turbo-build',
       options: {
-        optimizationLevel: 3,
-      },
-    },
+        optimizationLevel: 3
+      }
+    }
   ],
   framework: '@storybook/react',
   core: {
