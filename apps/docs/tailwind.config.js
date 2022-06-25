@@ -4,6 +4,7 @@
 module.exports = {
   presets: [require('tailwind-preset-base')],
   content: [
+    '../../apps/**/*.tsx',
     '../../packages/ui/**/*.tsx',
     './src/**/*.mdx',
   ],
