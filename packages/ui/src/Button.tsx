@@ -35,13 +35,19 @@ export const Button = ({
   ...props
 }: ButtonProps) => {
   const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary'
+
   return (
     <button
       type="button"
-      className={['px-4 bg-blue-600 text-white', `storybook-button--${size}`, mode].join(' ')}
+      className={[
+        'ml-4 flex h-24 border-2 border-gray-300 p-3 text-gray-700 shadow-md ',
+        `storybook-button--${size}`,
+        mode
+      ].join(' ')}
       style={{ backgroundColor }}
       {...props}
     >
+      <div className="scale-125 opacity-50 hover:scale-150 hover:opacity-75">test</div>
       {label}
     </button>
   )

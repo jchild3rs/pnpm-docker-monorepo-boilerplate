@@ -1,11 +1,11 @@
 /**
  * @type {import('tailwindcss').Config}
  */
- module.exports = {
+module.exports = {
   theme: {
     extend: {
-      "foo": "green"
-    },
+      foo: 'green'
+    }
   },
-  plugins: [],
+  plugins: [require('prettier-plugin-tailwindcss')]
 }
