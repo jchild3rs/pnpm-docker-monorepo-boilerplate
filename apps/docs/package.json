@@ -6,7 +6,7 @@
     "dev": "start-storybook -p 6006",
     "build": "build-storybook -c .storybook -o build --quiet",
     "serve": "npx http-server ./build",
-    "test": "chromatic"
+    "visual-regression": "chromatic"
   },
   "devDependencies": {
     "@storybook/addon-a11y": "^6.5.9",
