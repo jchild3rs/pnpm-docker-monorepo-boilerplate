@@ -1,24 +1,29 @@
-import { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
+import { GetStaticPropsContext, InferGetServerSidePropsType } from 'next'
+import { Suspense } from 'react'
 import Page from '../../components/page.client'
 import PostDetail from '../../components/post-detail.client'
-import { loadPostById, loadAllPostIds } from '../../lib/posts'
+import Skeleton from '../../components/skeleton'
+import { loadPostById } from '../../lib/posts'
+import useData from '../../lib/use-data'
 
-export default function PostsByIdSSG(props: InferGetStaticPropsType<typeof getStaticProps>) {
+function PostDetailWithData({ id }: { id: string }) {
+  const { data: post } = useData('post-' + id, () => loadPostById(id))
+
+  return <PostDetail post={post} />
+}
+
+export default function PostsByIdSSR(
+  props: InferGetServerSidePropsType<typeof getServerSideProps>
+) {
   return (
-    <Page pageTitle={props.post.title}>
-      <PostDetail post={props.post} />
+    <Page pageTitle="test">
+      <Suspense fallback={<Skeleton />}>
+        <PostDetailWithData id={props.id} />
+      </Suspense>
     </Page>
   )
 }
 
-export const getStaticProps = async ({ params }: GetStaticPropsContext) => ({
-  props: { post: await loadPostById(params?.id as string) },
-  revalidate: 10 // In seconds
-})
-
-export const getStaticPaths = async () => ({
-  paths: (await loadAllPostIds()).map((id) => ({
-    params: { id }
-  })),
-  fallback: 'blocking'
+export const getServerSideProps = async ({ params }: GetStaticPropsContext) => ({
+  props: { id: params?.id as string }
 })

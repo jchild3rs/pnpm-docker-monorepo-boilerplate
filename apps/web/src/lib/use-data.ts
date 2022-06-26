@@ -1,6 +1,6 @@
 const cache: any = {}
 
-export default function useData(key: string | number, fetcher: () => Promise<any>) {
+export default function useData(key: string | number, fetcher: any) {
   if (!cache[key]) {
     let data: undefined
     let error: string | undefined
