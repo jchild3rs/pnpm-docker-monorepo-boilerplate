@@ -19,7 +19,11 @@ export default {
     Label,
     Radio
   },
-  parameters: { actions: { argTypesRegex: '^on.*', handles: ['submit'] } }
+  parameters: {
+    actions: { argTypesRegex: '^on.*', handles: ['submit'] },
+    // More on Story layout: https://storybook.js.org/docs/react/configure/story-layout
+    layout: 'fullscreen'
+  }
 } as ComponentMeta<typeof LeadForm>
 
 const Template: ComponentStory<typeof LeadForm> = (args) => <LeadForm {...args} />
