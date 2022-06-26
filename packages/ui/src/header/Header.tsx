@@ -3,7 +3,7 @@ import React from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
-import { Button } from './'
+import { Button } from '../'
 
 type User = {
   name: string
@@ -43,7 +43,7 @@ export function Header({ onCreateAccount, onLogin, onLogout, user }: HeaderProps
             <div className="flex h-16 items-center justify-between">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <a href="/">
+                  <a href="/Users/james/Public">
                     <img
                       className="h-8 w-8"
                       src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
@@ -83,7 +83,7 @@ export function Header({ onCreateAccount, onLogin, onLogout, user }: HeaderProps
                   {user ? (
                     <>
                       <span className="welcome">
-                        Welcome, <b>{user.name}</b>!
+                        Hi, <b>{user.name}</b>!
                       </span>
                       <Menu as="div" className="relative ml-3">
                         <div>

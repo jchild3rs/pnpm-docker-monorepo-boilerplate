@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
 
-import { Header } from './'
+import { Header } from '../'
 
 type User = {
   name: string

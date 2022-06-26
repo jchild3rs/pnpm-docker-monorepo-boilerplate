@@ -2,22 +2,30 @@ import React from 'react'
 
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { within, userEvent } from '@storybook/testing-library'
-import { Page } from './Page'
+import { Header, LeadForm, Page } from '../'
 
 export default {
-  title: 'UI/Page',
+  title: 'UI Components/Layout/Page',
   component: Page,
   args: {
     heading: 'Dashboard',
     children: (
-      <div className="px-4 py-6 sm:px-0">
-        <div className="h-96 rounded-lg border-4 border-dashed border-gray-200" />
+      <div className="rounded-lg bg-white px-4 sm:px-0">
+        <LeadForm
+          onSubmit={(e) => {
+            e.preventDefault()
+          }}
+        />
       </div>
     )
   },
   parameters: {
     // More on Story layout: https://storybook.js.org/docs/react/configure/story-layout
     layout: 'fullscreen'
+  },
+  subcomponents: {
+    Header,
+    LeadForm
   }
 } as ComponentMeta<typeof Page>
 

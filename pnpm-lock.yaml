@@ -122,6 +122,7 @@ importers:
       postcss: ^8.4.14
       react: ^18.1.0
       react-dom: ^18.1.0
+      storybook-addon-pseudo-states: ^1.15.1
       storybook-addon-turbo-build: ^1.1.0
       tailwind-preset-base: workspace:*
       tailwindcss: ^3.1.2
@@ -151,6 +152,7 @@ importers:
       postcss: 8.4.14
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+      storybook-addon-pseudo-states: 1.15.1_uwzxf2kmksmihi4as2vrfuw5na
       storybook-addon-turbo-build: 1.1.0
       tailwind-preset-base: link:../../packages/tailwind-present-base
       tailwindcss: 3.1.4
@@ -15842,6 +15844,27 @@ packages:
 
   /store2/2.13.2:
     resolution: {integrity: sha512-CMtO2Uneg3SAz/d6fZ/6qbqqQHi2ynq6/KzMD/26gTkiEShCcpqFfTHgOxsE0egAq6SX3FmN4CeSqn8BzXQkJg==}
+    dev: true
+
+  /storybook-addon-pseudo-states/1.15.1_uwzxf2kmksmihi4as2vrfuw5na:
+    resolution: {integrity: sha512-GRBf63wRHoFwN65hRTdTaIcE7jn2Yj2B/dNyj03o8TRBevnmOL80NfLAGsmDYP4a7Ye3kBkILX952aUkK4P+ZA==}
+    peerDependencies:
+      '@storybook/addons': ^6.5.0
+      '@storybook/api': ^6.5.0
+      '@storybook/components': ^6.5.0
+      '@storybook/core-events': ^6.5.0
+      '@storybook/theming': ^6.5.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-dom:
+        optional: true
+    dependencies:
+      '@storybook/addons': 6.5.9_biqbaboplfbrettd7655fr4n2y
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: true
 
   /storybook-addon-turbo-build/1.1.0:

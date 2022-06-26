@@ -1,44 +1,16 @@
-import React, {
-  ComponentProps,
-  FormHTMLAttributes,
-  InputHTMLAttributes,
-  LabelHTMLAttributes
-} from 'react'
-import { Button } from './Button'
+import React, { FormHTMLAttributes } from 'react'
+import { Button, Checkbox, Input, Label, Radio } from '../'
 
-const Input = (props: InputHTMLAttributes<HTMLInputElement>) => (
-  <input
-    {...props}
-    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-  />
-)
+export interface LeadFormProps extends FormHTMLAttributes<HTMLFormElement> {
+  onSubmit: React.FormEventHandler<HTMLFormElement>
+}
 
-const Label = (props: LabelHTMLAttributes<HTMLLabelElement>) => (
-  <label {...props} className="block text-sm font-medium text-gray-700" />
-)
-
-const Checkbox = (props: ComponentProps<typeof Input>) => (
-  <input
-    {...props}
-    type="checkbox"
-    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-  />
-)
-
-const Radio = (props: ComponentProps<typeof Input>) => (
-  <input
-    {...props}
-    type="radio"
-    className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
-  />
-)
-
-export function LeadForm(props: FormHTMLAttributes<HTMLFormElement>) {
+export function LeadForm(props: LeadFormProps) {
   return (
     <form {...props}>
       <div className="bg-white px-4 py-5 sm:p-6">
         <div className="grid grid-cols-6 gap-6">
-          <div className="col-span-6 sm:col-span-3">
+          <div className="col-span-6 space-y-1 sm:col-span-3">
             <Label htmlFor="first-name">First name</Label>
             <Input
               required
@@ -49,17 +21,17 @@ export function LeadForm(props: FormHTMLAttributes<HTMLFormElement>) {
             />
           </div>
 
-          <div className="col-span-6 sm:col-span-3">
+          <div className="col-span-6 space-y-1 sm:col-span-3">
             <Label htmlFor="last-name">Last name</Label>
             <Input type="text" name="last-name" id="last-name" autoComplete="family-name" />
           </div>
 
-          <div className="col-span-6 sm:col-span-4">
+          <div className="col-span-6 space-y-1 sm:col-span-4">
             <Label htmlFor="email-address">Email address</Label>
             <Input type="text" name="email-address" id="email-address" autoComplete="email" />
           </div>
 
-          <div className="col-span-6 sm:col-span-3">
+          <div className="col-span-6 space-y-1 sm:col-span-3">
             <Label htmlFor="country">Country</Label>
             <select
               id="country"
@@ -73,7 +45,7 @@ export function LeadForm(props: FormHTMLAttributes<HTMLFormElement>) {
             </select>
           </div>
 
-          <div className="col-span-6">
+          <div className="col-span-6 space-y-1">
             <Label htmlFor="street-address">Street address</Label>
             <Input
               type="text"
@@ -83,17 +55,17 @@ export function LeadForm(props: FormHTMLAttributes<HTMLFormElement>) {
             />
           </div>
 
-          <div className="col-span-6 sm:col-span-6 lg:col-span-2">
+          <div className="col-span-6 space-y-1 sm:col-span-6 lg:col-span-2">
             <Label htmlFor="city">City</Label>
             <Input type="text" name="city" id="city" autoComplete="address-level2" />
           </div>
 
-          <div className="col-span-6 sm:col-span-3 lg:col-span-2">
+          <div className="col-span-6 space-y-1 sm:col-span-3 lg:col-span-2">
             <Label htmlFor="region">State / Province</Label>
             <Input type="text" name="region" id="region" autoComplete="address-level1" />
           </div>
 
-          <div className="col-span-6 sm:col-span-3 lg:col-span-2">
+          <div className="col-span-6 space-y-1 sm:col-span-3 lg:col-span-2">
             <Label htmlFor="postal-code">ZIP / Postal code</Label>
             <Input type="text" name="postal-code" id="postal-code" autoComplete="postal-code" />
           </div>
@@ -145,31 +117,21 @@ export function LeadForm(props: FormHTMLAttributes<HTMLFormElement>) {
             Push Notifications
           </legend>
           <p className="text-sm text-gray-500">These are delivered via SMS to your mobile phone.</p>
-          <div className="mt-4 space-y-4">
-            <div className="flex items-center">
+          <div className="mt-4">
+            <label htmlFor="push-everything" className="flex items-center py-2">
               <Radio id="push-everything" name="push-notifications" />
-              <label
-                htmlFor="push-everything"
-                className="ml-3 block text-sm font-medium text-gray-700"
-              >
-                Everything
-              </label>
-            </div>
-            <div className="flex items-center">
+              <div className="ml-3 block text-sm font-medium text-gray-700">Everything</div>
+            </label>
+            <label htmlFor="push-email" className="flex items-center py-2">
               <Radio id="push-email" name="push-notifications" />
-              <label htmlFor="push-email" className="ml-3 block text-sm font-medium text-gray-700">
-                Same as email
-              </label>
-            </div>
-            <div className="flex items-center">
+              <div className="ml-3 block text-sm font-medium text-gray-700">Same as email</div>
+            </label>
+            <label htmlFor="push-nothing" className="flex items-center py-2">
               <Radio id="push-nothing" name="push-notifications" />
-              <label
-                htmlFor="push-nothing"
-                className="ml-3 block text-sm font-medium text-gray-700"
-              >
+              <div className="ml-3 block text-sm font-medium text-gray-700">
                 No push notifications
-              </label>
-            </div>
+              </div>
+            </label>
           </div>
         </fieldset>
       </div>

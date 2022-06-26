@@ -1,14 +1,15 @@
 module.exports = {
   stories: [
     '../src/**/*.stories.mdx',
-    '../../../apps/**/*.stories.@(ts|tsx)',
-    '../../../packages/**/*.stories.@(ts|tsx)'
+    '../../../apps/**/*.stories.@(ts|tsx|mdx)',
+    '../../../packages/**/*.stories.@(ts|tsx|mdx)'
   ],
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
     '@storybook/addon-a11y',
+    'storybook-addon-pseudo-states',
     {
       /**
        * Fix Storybook issue with PostCSS@8
