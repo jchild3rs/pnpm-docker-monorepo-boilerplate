@@ -1,5 +1,6 @@
 module.exports = {
   stories: [
+    '../src/GettingStarted.stories.mdx',
     '../src/**/*.stories.mdx',
     '../../../apps/**/*.stories.@(ts|tsx|mdx)',
     '../../../packages/**/*.stories.@(ts|tsx|mdx)'
@@ -9,7 +10,6 @@ module.exports = {
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
     '@storybook/addon-a11y',
-    'storybook-addon-pseudo-states',
     {
       /**
        * Fix Storybook issue with PostCSS@8
@@ -27,7 +27,8 @@ module.exports = {
       options: {
         optimizationLevel: 3
       }
-    }
+    },
+    'storybook-addon-pseudo-states'
   ],
   framework: '@storybook/react',
   core: {

@@ -8,14 +8,14 @@
     "check": "tsc --noEmit",
     "lint": "eslint \"{src,test}/**/*.tsx\""
   },
-  "peerDependencies": {    
+  "dependencies": {
     "@headlessui/react": "^1.6.4",
-    "@heroicons/react": "^1.0.6",
+    "@heroicons/react": "^1.0.6"
+  },
+  "peerDependencies": {    
     "react": "^18.1.0"
   },
   "devDependencies": {
-    "@headlessui/react": "^1.6.4",
-    "@heroicons/react": "^1.0.6",
     "@types/react": "^18.0.12",
     "@types/react-dom": "^18.0.5",
     "eslint": "^8.17.0",

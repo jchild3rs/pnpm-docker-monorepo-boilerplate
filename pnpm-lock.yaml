@@ -262,9 +262,10 @@ importers:
       react: ^18.1.0
       tsconfig: workspace:*
       typescript: ^4.7.2
-    devDependencies:
+    dependencies:
       '@headlessui/react': 1.6.5_react@18.2.0
       '@heroicons/react': 1.0.6_react@18.2.0
+    devDependencies:
       '@types/react': 18.0.14
       '@types/react-dom': 18.0.5
       eslint: 8.18.0
@@ -2920,7 +2921,7 @@ packages:
       react-dom: ^16 || ^17 || ^18
     dependencies:
       react: 18.2.0
-    dev: true
+    dev: false
 
   /@heroicons/react/1.0.6_react@18.2.0:
     resolution: {integrity: sha512-JJCXydOFWMDpCP4q13iEplA503MQO3xLoZiKum+955ZCtHINWnx26CUxVxxFQu/uLb4LW3ge15ZpzIkXKkJ8oQ==}
@@ -2928,6 +2929,7 @@ packages:
       react: '>= 16'
     dependencies:
       react: 18.2.0
+    dev: false
 
   /@humanwhocodes/config-array/0.9.5:
     resolution: {integrity: sha512-ObyMyWxZiCu/yTisA7uzx81s40xR2fD5Cg/2Kq7G02ajkNubJf6BopgDTmDyc3U7sXpNKM8cYOw7s7Tyr+DnCw==}

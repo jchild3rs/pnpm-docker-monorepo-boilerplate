@@ -24,10 +24,10 @@ pnpm install
 pnpm test
 ```
 
-If you wish to test a single file you can run
+If you wish to test a single file within an app or package, you can run:
 
 ```bash
-pnpm test /src/path/to/file.test.tsx
+pnpm test --filter api -- "file name regex/path"
 ```
 
 ## Linting
