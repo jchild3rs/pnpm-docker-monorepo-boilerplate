@@ -1,3 +1,4 @@
+export * from './alert/Alert'
 export * from './button/Button'
 export * from './checkbox/Checkbox'
 export * from './header/Header'

@@ -28,8 +28,8 @@ export const Button = ({
   ...props
 }: ButtonProps) => {
   const mode = primary
-    ? 'bg-blue-500 hover:bg-blue-700 text-white font-bold rounded'
-    : 'bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white border border-blue-500 hover:border-transparent rounded'
+    ? 'bg-indigo-500 hover:bg-indigo-700 text-white font-bold rounded'
+    : 'bg-transparent hover:bg-indigo-500 text-indigo-700 font-semibold hover:text-white border border-indigo-500 hover:border-transparent rounded'
 
   const disabled = props.disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
 
