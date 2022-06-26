@@ -20,9 +20,8 @@ export default {
     Radio
   },
   parameters: {
-    actions: { argTypesRegex: '^on.*', handles: ['submit'] },
-    // More on Story layout: https://storybook.js.org/docs/react/configure/story-layout
-    layout: 'fullscreen'
+    backgrounds: { default: 'light' },
+    actions: { argTypesRegex: '^on.*', handles: ['submit'] }
   }
 } as ComponentMeta<typeof LeadForm>
 

@@ -10,16 +10,15 @@ export default {
   args: {
     heading: 'Dashboard',
     children: (
-      <div className="rounded-lg bg-white px-4 sm:px-0">
-        <LeadForm
-          onSubmit={(e) => {
-            e.preventDefault()
-          }}
-        />
-      </div>
+      <LeadForm
+        onSubmit={(e) => {
+          e.preventDefault()
+        }}
+      />
     )
   },
   parameters: {
+    backgrounds: { default: 'light' },
     // More on Story layout: https://storybook.js.org/docs/react/configure/story-layout
     layout: 'fullscreen'
   },

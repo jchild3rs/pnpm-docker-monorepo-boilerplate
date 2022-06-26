@@ -7,7 +7,7 @@ export interface LeadFormProps extends FormHTMLAttributes<HTMLFormElement> {
 
 export function LeadForm(props: LeadFormProps) {
   return (
-    <form className="bg-white" {...props}>
+    <form {...props}>
       <div className="py-5">
         <div className="grid grid-cols-6 gap-6">
           <div className="col-span-6 space-y-1 sm:col-span-3">
