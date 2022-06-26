@@ -26,6 +26,7 @@
     "@storybook/client-api": "^6.5.9",
     "@storybook/client-logger": "^6.5.9",
     "@storybook/core": "^6.5.9",
+    "@storybook/jest": "^0.0.10",
     "@storybook/manager-webpack5": "^6.5.9",
     "@storybook/react": "^6.5.9",
     "@storybook/source-loader": "^6.5.9",

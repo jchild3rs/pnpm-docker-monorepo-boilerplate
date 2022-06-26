@@ -1,5 +1,5 @@
 import { GetStaticPropsContext, InferGetServerSidePropsType } from 'next'
-import Layout from '../../components/layout.server'
+import Page from '../../components/page.client'
 import PostDetail from '../../components/post-detail.client'
 import { loadPostById } from '../../lib/posts'
 
@@ -7,9 +7,9 @@ export default function PostsByIdSSR(
   props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) {
   return (
-    <Layout pageTitle={props.post.title}>
+    <Page pageTitle={props.post.title}>
       <PostDetail post={props.post} />
-    </Layout>
+    </Page>
   )
 }
 

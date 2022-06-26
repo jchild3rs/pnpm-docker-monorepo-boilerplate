@@ -15,11 +15,16 @@ const fakeUser: User = {
     'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
 }
 
-export const Page: React.FC<{ heading: string; children: ReactNode; user?: User }> = (props) => {
+export const Page: React.FC<{
+  className?: string
+  heading: string
+  children: ReactNode
+  user?: User
+}> = (props) => {
   const [user, setUser] = React.useState<User | undefined>(props.user)
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className={props.className}>
       <Header
         user={user}
         onLogin={() => setUser(fakeUser)}

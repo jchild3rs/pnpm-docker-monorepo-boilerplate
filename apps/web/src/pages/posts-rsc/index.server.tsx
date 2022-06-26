@@ -6,8 +6,8 @@ import Page from '../../components/page.client'
 
 export default function PostsSSG(props: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <Page pageTitle="Posts (SSG)">
-      <PostList type={PageTypeEnum.STATICALLY_GENERATED} posts={props.posts || []} />
+    <Page pageTitle="Posts (RSC)">
+      <PostList type={PageTypeEnum.REACT_SERVER_COMPONENTS} posts={props.posts || []} />
     </Page>
   )
 }
