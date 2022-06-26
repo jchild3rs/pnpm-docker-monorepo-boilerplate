@@ -6,6 +6,7 @@ import Skeleton from '../../components/skeleton'
 import useData from '../../lib/use-data'
 import { GetServerSidePropsContext } from 'next'
 import Page from '../../components/page.client'
+import PostListSkeleton from '../../components/post-list.skeleton'
 
 function PostListWithData() {
   const { data: posts } = useData('post-list', loadAllPosts)
@@ -16,7 +17,7 @@ function PostListWithData() {
 export default function PostsSSG() {
   return (
     <Page pageTitle="test">
-      <Suspense fallback={<Skeleton />}>
+      <Suspense fallback={<PostListSkeleton />}>
         <PostListWithData />
       </Suspense>
     </Page>

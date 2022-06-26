@@ -18,7 +18,7 @@ const waitFor = (ms: number) => new Promise((resolve) => setTimeout(resolve,ms))
 
 
 export async function loadPostById(id: string): Promise<Post> {
-  await waitFor(2000)
+  await waitFor(1000)
   const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
 
   if (res.status !== 200) {
@@ -31,7 +31,7 @@ export async function loadPostById(id: string): Promise<Post> {
 
 
 export async function loadAllPosts(): Promise<Post[]> {
-  await waitFor(2000)
+  await waitFor(5000)
 
   const res = await fetch(`https://jsonplaceholder.typicode.com/posts?_limit=10`)
 
