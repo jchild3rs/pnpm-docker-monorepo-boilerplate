@@ -1,4 +1,3 @@
-/* This example requires Tailwind CSS v2.0+ */
 import { ReactNode } from 'react'
 import { Page as BasePage } from 'ui'
 
