@@ -6,5 +6,8 @@
   "files": [
     "global.css",
     "tailwind.config.js"
-  ]
+  ],
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.2"
+  }
 }

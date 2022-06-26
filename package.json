@@ -24,12 +24,13 @@
     "test": "turbo run test"
   },
   "devDependencies": {
+    "@storybook/addon-interactions": "^6.5.9",
     "@storybook/core": "^6.5.9",
+    "@storybook/jest": "^0.0.10",
     "@storybook/react": "^6.5.9",
     "@storybook/testing-library": "0.0.13",
     "autoprefixer": "^10.4.7",
     "eslint": "^8.17.0",
-    "jest": "^28.1.1",
     "postcss": "^8.4.14",
     "prettier": "^2.7.1",
     "prettier-plugin-tailwindcss": "^0.1.11",

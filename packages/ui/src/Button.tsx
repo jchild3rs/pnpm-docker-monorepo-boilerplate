@@ -1,26 +1,20 @@
-import React from 'react'
+import React, { ButtonHTMLAttributes, ReactNode } from 'react'
 
-export interface ButtonProps {
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * Is this the principal call to action on the page?
    */
   primary?: boolean
   /**
-   * What background color to use
-   */
-  backgroundColor?: string
-  /**
    * How large should the button be?
    */
   size?: 'small' | 'medium' | 'large'
   /**
-   * Button contents
-   */
-  label: string
-  /**
    * Optional click handler
    */
   onClick?: () => void
+  children: ReactNode
+  type?: 'submit' | 'button'
 }
 
 /**
@@ -29,20 +23,28 @@ export interface ButtonProps {
 export const Button = ({
   primary = false,
   size = 'medium',
-  backgroundColor,
-  label,
+  children,
+  type = 'button',
   ...props
 }: ButtonProps) => {
-  const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary'
+  const mode = primary
+    ? 'bg-indigo-500 hover:bg-indigo-700 text-white font-bold rounded'
+    : 'bg-transparent hover:bg-indigo-500 text-indigo-700 font-semibold hover:text-white border border-indigo-500 hover:border-transparent rounded'
+
+  const disabled = props.disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
+
+  let sizes = ''
+  if (size === 'small') {
+    sizes = 'py-1 px-2'
+  } else if (size === 'large') {
+    sizes = 'py-3 px-6'
+  } else {
+    sizes = 'py-2 px-4'
+  }
 
   return (
-    <button
-      type="button"
-      className={[`storybook-button--${size}`, mode].join(' ')}
-      style={{ backgroundColor }}
-      {...props}
-    >
-      {label}
+    <button type={type} {...props} className={[sizes, mode, disabled].join(' ')}>
+      {children}
     </button>
   )
 }
