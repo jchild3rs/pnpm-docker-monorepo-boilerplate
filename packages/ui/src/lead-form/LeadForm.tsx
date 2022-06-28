@@ -136,7 +136,7 @@ export function LeadForm(props: LeadFormProps) {
         </fieldset>
       </div>
 
-      <div className="pb-4">
+      <div className="pb-5">
         <Button primary type="submit">
           Save
         </Button>

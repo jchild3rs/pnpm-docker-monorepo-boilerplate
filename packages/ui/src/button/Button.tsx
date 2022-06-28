@@ -33,7 +33,7 @@ export const Button = ({
 
   const disabled = props.disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
 
-  let sizes = ''
+  let sizes: string
   if (size === 'small') {
     sizes = 'py-1 px-2'
   } else if (size === 'large') {

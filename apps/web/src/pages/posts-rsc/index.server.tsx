@@ -1,12 +1,11 @@
-import PostList from '../../components/post-list.client'
-import { loadAllPosts, Post } from '../../lib/posts'
-import { PageTypeEnum } from '../../lib/page-types'
-import { Suspense } from 'react'
-import Skeleton from '../../components/skeleton'
-import useData from '../../lib/use-data'
 import { GetServerSidePropsContext } from 'next'
+import { Suspense } from 'react'
 import Page from '../../components/page.client'
+import PostList from '../../components/post-list.client'
 import PostListSkeleton from '../../components/post-list.skeleton'
+import { PageTypeEnum } from '../../lib/page-types'
+import { loadAllPosts } from '../../lib/posts'
+import useData from '../../lib/use-data'
 
 function PostListWithData() {
   const { data: posts } = useData('post-list', loadAllPosts)

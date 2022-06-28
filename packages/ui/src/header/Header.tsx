@@ -43,7 +43,7 @@ export function Header({ onCreateAccount, onLogin, onLogout, user }: HeaderProps
             <div className="flex h-16 items-center justify-between">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <a href="/Users/james/Public">
+                  <a href="/">
                     <img
                       className="h-8 w-8"
                       src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"

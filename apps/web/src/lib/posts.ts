@@ -14,8 +14,7 @@ function formatPost(post: Post) {
   }
 }
 
-const waitFor = (ms: number) => new Promise((resolve) => setTimeout(resolve,ms))
-
+const waitFor = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
 
 export async function loadPostById(id: string): Promise<Post> {
   await waitFor(1000)
@@ -27,8 +26,6 @@ export async function loadPostById(id: string): Promise<Post> {
 
   return res.json().then(formatPost)
 }
-
-
 
 export async function loadAllPosts(): Promise<Post[]> {
   await waitFor(5000)

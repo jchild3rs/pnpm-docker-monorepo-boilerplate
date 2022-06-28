@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, Modal, Alert, LeadForm } from 'ui'
+import { Alert, Button, LeadForm, Modal } from 'ui'
 
 export function LeadFormModal() {
   const [open, setIsOpen] = useState(false)

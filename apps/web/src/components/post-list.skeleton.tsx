@@ -6,7 +6,7 @@ export default function PostListSkeleton({ count = 10 }) {
       {new Array(count).fill(null)?.map((_post, i) => (
         <li key={i} className="animate-pulse">
           <span className="flex items-center bg-white p-4 leading-none text-indigo-600">
-            <div className="h-4 w-full rounded-sm bg-slate-400"></div>
+            <div className="h-4 w-full rounded-sm bg-slate-200"></div>
           </span>
         </li>
       ))}

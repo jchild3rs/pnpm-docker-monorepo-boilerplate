@@ -1,5 +1,5 @@
-import Page from '../components/page.client'
 import { LeadFormModal } from '../components/lead-form-modal.client'
+import Page from '../components/page.client'
 import { PageTypeEnum } from '../lib/page-types'
 
 export default function Web() {

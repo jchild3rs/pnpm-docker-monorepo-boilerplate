@@ -10,7 +10,7 @@
     "build": "nest build",
     "check": "tsc --noEmit",
     "publish": "APP=api ../../scripts/publish-app.sh",
-    "dev": "PORT=5000 nest start --watch --debug",
+    "dev": "PORT=5001 nest start --watch --debug",
     "start": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
     "lint:fix": "pnpm lint --fix",

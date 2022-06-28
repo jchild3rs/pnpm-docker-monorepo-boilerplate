@@ -1,7 +1,7 @@
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
 import Page from '../../components/page.client'
 import PostDetail from '../../components/post-detail.client'
-import { loadPostById, loadAllPostIds } from '../../lib/posts'
+import { loadAllPostIds, loadPostById } from '../../lib/posts'
 
 export default function PostsByIdSSG(props: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
