@@ -1,7 +1,7 @@
+import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
 
-import { Input, Label } from '../'
+import { Input } from '../'
 
 export default {
   title: 'UI Components/Primitives/Input',

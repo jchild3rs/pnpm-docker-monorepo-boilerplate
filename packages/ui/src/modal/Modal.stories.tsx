@@ -1,5 +1,5 @@
+import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React, { useEffect, useState } from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
 
 import { LeadForm, Modal } from '..'
 

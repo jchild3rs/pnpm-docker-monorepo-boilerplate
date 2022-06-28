@@ -1,5 +1,5 @@
-import React, { Fragment, ReactNode, useEffect, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
+import React, { Fragment, ReactNode } from 'react'
 
 export type ModalProps = {
   isOpen?: boolean

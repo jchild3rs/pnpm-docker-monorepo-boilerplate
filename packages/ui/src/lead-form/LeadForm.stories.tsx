@@ -1,6 +1,6 @@
+import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Button, Checkbox, Input, Label, Radio, LeadForm } from '../'
+import { Button, Checkbox, Input, Label, LeadForm, Radio } from '../'
 
 export default {
   title: 'UI Components/Forms/Lead Form',
