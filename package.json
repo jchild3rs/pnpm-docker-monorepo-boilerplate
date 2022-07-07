@@ -13,7 +13,6 @@
   ],
   "scripts": {
     "build": "turbo run build",
-    "ci": "turbo run check lint test build --output-logs=new-only",
     "dev": "turbo run dev --parallel",
     "dev:api": "turbo run dev --filter=api...",
     "dev:docs": "turbo run dev --filter=docs...",
@@ -21,7 +20,11 @@
     "format": "prettier --write \"**/*.{ts,tsx,md,mdx}\"",
     "check": "turbo run check",
     "lint": "turbo run lint",
-    "test": "turbo run test"
+    "lint:fix": "turbo run lint -- --fix",
+    "pipeline": "turbo run check lint test build --output-logs=new-only",
+    "test": "turbo run test",
+    "test:coverage": "turbo run test -- --coverage",
+    "test:watch": "turbo run test --parallel -- --watch"
   },
   "devDependencies": {
     "@storybook/addon-interactions": "^6.5.9",
