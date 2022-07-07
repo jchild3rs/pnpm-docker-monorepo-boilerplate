@@ -4,18 +4,19 @@
     "dev": {
       "cache": false
     },
-    "build": {
-      "dependsOn": ["^build"]
-    },
     "check": {
       "outputs": []
     },
     "lint": {
+      "dependsOn": ["check"],
       "outputs": []
     },
     "test": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["lint", "^build"],
       "outputs": []
+    },
+    "build": {
+      "dependsOn": ["test", "^build"]
     }
   },
   "baseBranch": "origin/main",
